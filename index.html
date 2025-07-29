@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitalia - Your Personalized Health Plan v3.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+       .step-card, .interstitial-card {
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+       .form-radio:checked, .form-checkbox:checked {
+            background-color: #374151;
+            border-color: #374151;
+        }
+       .form-radio:checked {
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
+        }
+       .form-checkbox:checked {
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+        }
+       .chart-container {
+            position: relative;
+            height: 250px;
+            width: 100%;
+            max-width: 350px;
+            margin: auto;
+        }
+       .dashboard-tab {
+            transition: all 0.3s ease;
+        }
+       .dashboard-tab.active {
+            border-bottom-color: #1f2937;
+            color: #1f2937;
+            font-weight: 600;
+        }
+       .dashboard-content {
+            display: none;
+        }
+       .dashboard-content.active {
+            display: block;
+        }
+        .prose h4 {
+            font-size: 1.125rem; /* 18px */
+            font-weight: 600;
+            color: #374151; /* gray-700 */
+            margin-top: 1.5rem; /* 24px */
+            margin-bottom: 0.5rem; /* 8px */
+        }
+        .prose .action-plan {
+            background-color: #f9fafb; /* gray-50 */
+            border: 1px solid #e5e7eb; /* gray-200 */
+            border-radius: 0.5rem; /* rounded-lg */
+            padding: 1rem; /* p-4 */
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div id="app" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 tracking-tight">Vitalia</h1>
+            <p class="mt-2 text-lg text-gray-600">Your Journey to Empowered Wellness Starts Here.</p>
+        </header>
+
+        <main>
+            <section id="heroSection" class="text-center">
+                <div class="max-w-3xl mx-auto">
+                    <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Translate Health Goals into an Actionable Plan</h2>
+                    <p class="mt-4 text-xl text-gray-600">Overwhelmed by health advice? We simplify it. Answer a few questions to generate a personalized, evidence-based wellness report that's clear, actionable, and designed just for you.</p>
+                    <button id="startBtn" class="mt-8 inline-block rounded-md border border-transparent bg-gray-800 px-8 py-3 text-base font-medium text-white hover:bg-gray-700 transition-colors">Create My Free Health Plan</button>
+                </div>
+            </section>
+
+            <section id="questionnaireSection" class="hidden">
+                <div class="max-w-2xl mx-auto bg-white p-6 sm:p-8 rounded-xl shadow-lg">
+                    <div id="progressBarContainer" class="w-full bg-gray-200 rounded-full h-2.5 mb-6">
+                        <div id="progressBar" class="bg-gray-700 h-2.5 rounded-full" style="width: 0%; transition: width 0.5s ease-in-out;"></div>
+                    </div>
+
+                    <!-- Step 1: Basics -->
+                    <div id="step1" class="step-card">
+                        <h3 class="text-2xl font-semibold mb-2">Let's start with the basics.</h3>
+                        <p class="text-gray-600 mb-6">This helps us tailor preventative care recommendations specifically for you.</p>
+                        <div class="space-y-4">
+                            <div>
+                                <label for="age" class="block text-sm font-medium text-gray-700">What is your age?</label>
+                                <input type="number" id="age" name="age" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm" placeholder="e.g., 42">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">What is your sex assigned at birth?</label>
+                                <fieldset class="mt-2">
+                                    <div class="space-y-2">
+                                        <label class="flex items-center p-3 border rounded-lg hover:bg-gray-50 cursor-pointer"><input type="radio" name="sex" value="Female" class="h-4 w-4 border-gray-300 text-gray-700 focus:ring-gray-600 form-radio"><span class="ml-3 block text-sm text-gray-900">Female</span></label>
+                                        <label class="flex items-center p-3 border rounded-lg hover:bg-gray-50 cursor-pointer"><input type="radio" name="sex" value="Male" class="h-4 w-4 border-gray-300 text-gray-700 focus:ring-gray-600 form-radio"><span class="ml-3 block text-sm text-gray-900">Male</span></label>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: Goal -->
+                    <div id="step2" class="step-card hidden opacity-0">
+                        <h3 class="text-2xl font-semibold mb-2">What's your primary wellness goal?</h3>
+                        <p class="text-gray-600 mb-6">Choose one area to focus on. Your report will provide a detailed, actionable plan for this goal.</p>
+                        <div id="goalsContainer" class="space-y-2"></div>
+                    </div>
+                    
+                    <!-- Step 3: Activity -->
+                    <div id="step3" class="step-card hidden opacity-0">
+                        <h3 class="text-2xl font-semibold mb-2">How active are you?</h3>
+                        <p class="text-gray-600 mb-6">Be honest! This helps us suggest realistic changes. (Moderate activity is anything that gets your heart rate up, like a brisk walk).</p>
+                        <div id="activityContainer" class="space-y-2"></div>
+                    </div>
+
+                    <!-- Step 4: Sleep -->
+                    <div id="step4" class="step-card hidden opacity-0">
+                        <h3 class="text-2xl font-semibold mb-2">How's your sleep?</h3>
+                        <p class="text-gray-600 mb-6">Quality sleep is a cornerstone of health. How many hours do you typically get per night?</p>
+                        <div id="sleepContainer" class="space-y-2"></div>
+                    </div>
+
+                    <!-- Step 5: Diet -->
+                    <div id="step5" class="step-card hidden opacity-0">
+                        <h3 class="text-2xl font-semibold mb-2">What does your diet look like?</h3>
+                        <p class="text-gray-600 mb-6">Which of these best describes your typical eating pattern?</p>
+                        <div id="dietContainer" class="space-y-2"></div>
+                    </div>
+
+                    <!-- Step 6: Conditions -->
+                    <div id="step6" class="step-card hidden opacity-0">
+                        <h3 class="text-2xl font-semibold mb-2">Do any of these apply to you?</h3>
+                        <p class="text-gray-600 mb-6">Select any existing health conditions you're managing. This helps us tailor lifestyle and dietary advice. (Optional)</p>
+                        <div id="conditionsContainer" class="space-y-2"></div>
+                    </div>
+                    
+                    <!-- Step 7: Consent -->
+                    <div id="step7" class="step-card hidden opacity-0">
+                        <h3 class="text-2xl font-semibold mb-2">Your Privacy & Consent</h3>
+                        <p class="text-gray-600 mb-6">Please review and agree to our terms to continue. We are committed to protecting your data.</p>
+                        <div class="space-y-4 bg-gray-50 p-4 rounded-lg border">
+                            <p class="text-sm text-gray-700">Vitalia uses the information you provide to generate a personalized health report. This report is for educational purposes only and is not a substitute for professional medical advice.</p>
+                            <label class="flex items-start">
+                                <input type="checkbox" id="consentCheck" class="h-5 w-5 mt-0.5 border-gray-300 rounded text-gray-700 focus:ring-gray-600 form-checkbox">
+                                <span class="ml-3 block text-sm text-gray-900">I understand and agree to the <a href="#" class="underline text-teal-700 hover:text-teal-800">Terms of Use</a> and <a href="#" class="underline text-teal-700 hover:text-teal-800">Privacy Policy</a>, and consent to the processing of my health data to create my report.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Step 8: Summary -->
+                    <div id="step8" class="step-card hidden opacity-0 text-center">
+                        <h3 class="text-2xl font-semibold mb-2">Ready to see your plan?</h3>
+                        <p class="text-gray-600 mb-6">We've gathered your information. Click below to generate your personalized wellness report.</p>
+                        <div class="bg-gray-100 p-4 rounded-lg text-left mb-6">
+                            <h4 class="font-semibold">Your Selections:</h4>
+                            <ul id="summaryList" class="list-disc list-inside text-gray-700 mt-2 text-sm"></ul>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 flex justify-between">
+                        <button id="prevBtn" class="inline-block rounded-md border border-gray-300 bg-white px-6 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50" disabled>Back</button>
+                        <button id="nextBtn" class="inline-block rounded-md border border-transparent bg-gray-800 px-6 py-2 text-base font-medium text-white hover:bg-gray-700 disabled:opacity-50">Next</button>
+                        <button id="generateBtn" class="hidden inline-block rounded-md border border-transparent bg-teal-700 px-6 py-2 text-base font-medium text-white hover:bg-teal-800">Generate Report</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="dashboardSection" class="hidden">
+                <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg">
+                    <div class="text-center border-b pb-6 mb-6">
+                        <h2 class="text-3xl font-bold text-gray-900">Your Wellness Dashboard</h2>
+                        <p id="dashboardDate" class="text-gray-500 mt-2"></p>
+                    </div>
+                    
+                    <div class="border-b border-gray-200">
+                        <nav class="-mb-px flex space-x-6" aria-label="Tabs">
+                            <button class="dashboard-tab active whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="tab-today">Today's Focus</button>
+                            <button class="dashboard-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="tab-report">Full Report</button>
+                            <button class="dashboard-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="tab-journal">My Journal</button>
+                            <button class="dashboard-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="tab-mood">Mood Tracker</button>
+                        </nav>
+                    </div>
+
+                    <div class="mt-6">
+                        <div id="tab-today" class="dashboard-content active">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">Today's Focus: <span id="todayGoal" class="text-teal-700"></span></h3>
+                            <div id="todayContent" class="prose max-w-none text-gray-600 bg-gray-50 p-4 rounded-lg"></div>
+                        </div>
+                        <div id="tab-report" class="dashboard-content">
+                             <div class="space-y-12" id="fullReportContent"></div>
+                        </div>
+                        <div id="tab-journal" class="dashboard-content">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">Daily Journal</h3>
+                            <p class="text-gray-600 mb-4">Journaling can help you process thoughts and feelings. What's on your mind today?</p>
+                            <textarea id="journalEntry" class="w-full h-48 p-3 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-500" placeholder="Start writing..."></textarea>
+                            <button id="saveJournalBtn" class="mt-4 inline-block rounded-md border border-transparent bg-gray-800 px-6 py-2 text-base font-medium text-white hover:bg-gray-700">Save Entry</button>
+                            <p id="journalStatus" class="text-sm text-green-600 mt-2"></p>
+                        </div>
+                        <div id="tab-mood" class="dashboard-content">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">Mood Tracker</h3>
+                            <p class="text-gray-600 mb-4">How are you feeling today? Logging your mood helps you recognize patterns over time.</p>
+                            <div class="flex space-x-2 justify-center text-4xl mb-6">
+                                <button class="mood-btn p-2 rounded-full hover:bg-gray-200 transition" data-mood="1">😞</button>
+                                <button class="mood-btn p-2 rounded-full hover:bg-gray-200 transition" data-mood="2">😐</button>
+                                <button class="mood-btn p-2 rounded-full hover:bg-gray-200 transition" data-mood="3">🙂</button>
+                                <button class="mood-btn p-2 rounded-full hover:bg-gray-200 transition" data-mood="4">😊</button>
+                                <button class="mood-btn p-2 rounded-full hover:bg-gray-200 transition" data-mood="5">😁</button>
+                            </div>
+                            <p id="moodStatus" class="text-center text-sm text-green-600 mb-6"></p>
+                            <div class="chart-container" style="height:200px; max-width: 500px;">
+                                <canvas id="moodChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-12 text-center border-t pt-8">
+                         <button id="restartBtn" class="inline-block rounded-md border border-transparent bg-gray-800 px-8 py-3 text-base font-medium text-white hover:bg-gray-700">Create a New Report</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="mt-16 text-center text-gray-500 text-sm">
+            <p>&copy; 2025 Vitalia. All Rights Reserved.</p>
+            <div class="mt-2 space-x-4">
+                <a href="#" class="hover:underline">Medical Disclaimer</a>
+                <span>&middot;</span>
+                <a href="#" class="hover:underline">Privacy Policy</a>
+                <span>&middot;</span>
+                <a href="#" class="hover:underline">Terms of Use</a>
+            </div>
+            <p class="mt-4 max-w-2xl mx-auto">Vitalia provides information for educational purposes only and is not a substitute for professional medical advice. Always consult a licensed physician for any health concerns. If you think you may have a medical emergency, call 911 or go to the nearest emergency room immediately.</p>
+        </footer>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const appData = {
+            goals: [
+                { id: 'exercise', name: 'Build a Sustainable Exercise Routine', 
+                  details: {
+                    why: "Regular physical activity is a cornerstone of health. It prompts your brain to release endorphins, natural mood-lifters. It also makes your body's cells more responsive to insulin, which helps regulate blood sugar levels. Over time, it strengthens your heart, lowers blood pressure, and improves cholesterol profiles, significantly reducing your risk for chronic diseases.",
+                    action: `<h4>Getting Started (Weeks 1-2):</h4><p>Aim for 3 sessions of 20-30 minutes of moderate activity. This could be a brisk walk where you can still talk but are slightly out of breath. The goal is consistency, not intensity.</p><h4>Building Up (Weeks 3-4):</h4><p>Increase to 4-5 sessions per week, or increase duration to 30-40 minutes. Consider adding 1-2 days of strength training using bodyweight exercises (squats, push-ups, planks) to build muscle, which boosts metabolism.</p><h4>Key to Success:</h4><p><strong>Find Joy:</strong> Choose activities you actually like. Dancing, hiking, swimming, or cycling are all great options. <strong>Schedule It:</strong> Block out time in your calendar as you would for any other important appointment.</p>`
+                  } 
+                },
+                { id: 'weight', name: 'Achieve/Maintain a Healthy Weight', 
+                  details: {
+                    why: "A healthy weight reduces the strain on your joints, heart, and other organs. It's closely linked to lower risk of type 2 diabetes, heart disease, and certain cancers. Weight management isn't about restrictive dieting; it's about creating a sustainable energy balance through nutrient-dense foods and activity.",
+                    action: `<h4>Focus on Food Quality:</h4><p>Prioritize whole foods: fruits, vegetables, lean proteins, and whole grains. These are high in nutrients and fiber, which helps you feel full and satisfied. A simple first step is to ensure half of your plate at every meal is composed of non-starchy vegetables.</p><h4>Practice Mindful Eating:</h4><p>Pay attention to your body's hunger and fullness cues. Eat slowly, savor your food, and stop when you're satisfied, not stuffed. Avoid eating while distracted (e.g., watching TV).</p><h4>Smart Swaps:</h4><p>Instead of eliminating foods, make smart substitutions. Swap sugary sodas for sparkling water, white bread for whole-grain, and creamy dressings for vinaigrettes.</p>`
+                  } 
+                },
+                { id: 'stress', name: 'Manage Daily Stress', 
+                  details: {
+                    why: "Chronic stress keeps your body in a constant 'fight-or-flight' state, elevating cortisol levels. Over time, this can disrupt sleep, impair digestion, weaken your immune system, and increase blood pressure. Stress management techniques help activate the body's relaxation response, counteracting these effects.",
+                    action: `<h4>Incorporate 'Micro-Resets':</h4><p>You don't need an hour to de-stress. Try 'Box Breathing' for 1-2 minutes: inhale for 4 seconds, hold for 4, exhale for 4, hold for 4. This simple technique can quickly lower your heart rate and calm your nervous system.</p><h4>Schedule 'Worry Time':</h4><p>Set aside 15 minutes each day to consciously think about your worries. When a stressful thought appears outside this time, acknowledge it and 'save it' for your scheduled slot. This can prevent stress from consuming your entire day.</p><h4>Connect with Nature:</h4><p>Even a 10-minute walk in a park or sitting near a window with a view of trees can lower cortisol levels and improve your sense of well-being. It's a scientifically-backed way to calm the mind.</p>`
+                  } 
+                },
+                { id: 'sleep', name: 'Improve Sleep Quality', 
+                  details: {
+                    why: "Sleep is not a passive state; it's a critical period for brain and body restoration. During sleep, your brain consolidates memories, clears out metabolic waste, and regulates hormones that control appetite (ghrelin and leptin). Consistently poor sleep is linked to impaired cognitive function, mood disorders, and a higher risk of many chronic health issues.",
+                    action: `<h4>Create a 'Power-Down' Hour:</h4><p>For the last hour before bed, avoid screens (phones, TVs, laptops). The blue light they emit can suppress melatonin, the hormone that signals your brain it's time to sleep. Instead, read a physical book, listen to calming music, or do gentle stretches.</p><h4>Optimize Your Environment:</h4><p>Your bedroom should be a sanctuary for sleep. Keep it as dark, quiet, and cool as possible. Blackout curtains, a white noise machine, or an eye mask can make a significant difference.</p><h4>Mind Your Intake:</h4><p>Avoid caffeine after 2 PM and large meals or excessive alcohol close to bedtime. While alcohol may make you feel sleepy initially, it disrupts sleep architecture later in the night, leading to less restorative rest.</p>`
+                  }
+                },
+            ],
+            activityLevels: [
+                {id: 'sedentary', name: 'Mostly Sedentary (Little to no intentional exercise)'},
+                {id: 'light', name: 'Lightly Active (e.g., walking 1-2 days/week)'},
+                {id: 'moderate', name: 'Moderately Active (30+ mins of exercise, 3-4 days/week)'},
+                {id: 'very', name: 'Very Active (30+ mins of exercise, 5+ days/week)'}
+            ],
+            sleepPatterns: [
+                {id: 'less_5', name: 'Less than 5 hours'},
+                {id: '5_6', name: '5-6 hours'},
+                {id: '7_8', name: '7-8 hours (Recommended)'},
+                {id: '9_plus', name: '9+ hours'}
+            ],
+            dietTypes: [
+                {id: 'standard', name: 'Standard Western (Processed foods, red meat, refined grains)'},
+                {id: 'mediterranean', name: 'Mediterranean-Style (Fruits, veg, whole grains, fish, olive oil)'},
+                {id: 'vegetarian', name: 'Vegetarian (No meat or fish)'},
+                {id: 'vegan', name: 'Vegan (No animal products)'},
+            ],
+            conditions: [
+                { id: 'diabetes', name: 'Type 2 Diabetes', 
+                  details: {
+                    why: "Managing Type 2 Diabetes involves keeping blood glucose levels stable. Diet and exercise are powerful tools because they directly impact how your body uses insulin and processes sugar. Consistent physical activity helps muscles use glucose for energy, and a balanced diet prevents sharp spikes in blood sugar.",
+                    action: `<h4>Adopt the 'Plate Method':</h4><p>This is a simple, visual way to build a balanced meal. Fill half your plate with non-starchy vegetables (like broccoli, spinach, or peppers), a quarter with lean protein (chicken, fish, beans), and the final quarter with complex carbohydrates (quinoa, brown rice, sweet potato). This method helps control portions and ensures a nutrient-rich meal with a lower glycemic load.</p>`
+                  }
+                },
+                { id: 'hypertension', name: 'Hypertension (High Blood Pressure)', 
+                  details: {
+                    why: "Hypertension puts extra strain on your arteries and heart. The DASH diet is proven effective because it's low in sodium (which can cause fluid retention and raise blood pressure) and high in potassium, magnesium, and calcium, which help relax blood vessels.",
+                    action: `<h4>Focus on the DASH Diet:</h4><p>This stands for Dietary Approaches to Stop Hypertension. It emphasizes fruits, vegetables, whole grains, and low-fat dairy. A key component is reducing sodium intake. Start by reading food labels and choosing 'low sodium' options. Cooking at home more often gives you full control over how much salt is in your food. Regular brisk walking can also be as effective as some medications in lowering blood pressure.</p>`
+                  }
+                },
+                { id: 'cholesterol', name: 'Hyperlipidemia (High Cholesterol)',
+                  details: {
+                    why: "High levels of LDL ('bad') cholesterol can lead to plaque buildup in your arteries. Soluble fiber is a key dietary component because it binds to cholesterol particles in your digestive system and removes them from the body before they get into circulation.",
+                    action: `<h4>Increase Soluble Fiber and Healthy Fats:</h4><p>Incorporate foods rich in soluble fiber like oats, barley, apples, brussels sprouts, and beans into your daily diet. A bowl of oatmeal for breakfast is a great start. Simultaneously, reduce saturated and trans fats (found in fatty meats, butter, and processed baked goods) and replace them with healthy unsaturated fats from sources like avocados, nuts, seeds, and olive oil.</p>`
+                  }
+                },
+            ],
+            preventativeCare: {
+                female: {
+                    '18-39': ['Blood Pressure Screening (every 1-2 years)', 'Cervical Cancer Screening (Pap test every 3 years)', 'Clinical Breast Exam (every 1-3 years)', 'Cholesterol Screening (if risk factors exist)'],
+                    '40-64': ['Mammogram (every 1-2 years)', 'Colorectal Cancer Screening (starting at age 45)', 'Diabetes Screening (starting at age 35)', 'Continue blood pressure and cholesterol checks'],
+                    '65+': ['Osteoporosis Screening (bone density scan)', 'Pneumonia Vaccine', 'Continue other screenings as advised by doctor']
+                },
+                male: {
+                    '18-39': ['Blood Pressure Screening (every 1-2 years)', 'Cholesterol Screening (discuss with doctor)', 'Testicular Exam (discuss with doctor)'],
+                    '40-64': ['Colorectal Cancer Screening (starting at age 45)', 'Diabetes Screening (starting at age 35)', 'Prostate Cancer Screening (discuss PSA test starting at age 50-55)', 'Continue blood pressure and cholesterol checks'],
+                    '65+': ['Abdominal Aortic Aneurysm Screening (one-time for smokers)', 'Pneumonia & Shingles Vaccines', 'Continue other screenings as advised by doctor']
+                }
+            }
+        };
+
+        let currentStep = 1;
+        const totalSteps = 8;
+        let userProfile = { age: null, sex: null, goal: null, activity: null, sleep: null, diet: null, conditions: [] };
+        let moodHistory = [];
+        let moodChart;
+
+        const heroSection = document.getElementById('heroSection');
+        const questionnaireSection = document.getElementById('questionnaireSection');
+        const dashboardSection = document.getElementById('dashboardSection');
+        const startBtn = document.getElementById('startBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const generateBtn = document.getElementById('generateBtn');
+        const restartBtn = document.getElementById('restartBtn');
+        const progressBar = document.getElementById('progressBar');
+        const steps = Array.from(document.querySelectorAll('.step-card'));
+
+        function initializeApp() {
+            populateOptions();
+            startBtn.addEventListener('click', startQuestionnaire);
+            nextBtn.addEventListener('click', handleNext);
+            prevBtn.addEventListener('click', handlePrev);
+            generateBtn.addEventListener('click', showDashboard);
+            restartBtn.addEventListener('click', resetApp);
+            
+            document.querySelectorAll('.dashboard-tab').forEach(tab => tab.addEventListener('click', switchTab));
+            document.getElementById('saveJournalBtn').addEventListener('click', saveJournalEntry);
+            document.querySelectorAll('.mood-btn').forEach(btn => btn.addEventListener('click', logMood));
+        }
+
+        function populateOptions() {
+            const createOption = (type, value, name, text) => `
+                <label class="flex items-center p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                    <input type="${type}" name="${name}" value="${value}" class="h-4 w-4 border-gray-300 text-gray-700 focus:ring-gray-600 form-${type}">
+                    <span class="ml-3 block text-sm font-medium text-gray-900">${text}</span>
+                </label>`;
+            
+            document.getElementById('goalsContainer').innerHTML = appData.goals.map(g => createOption('radio', g.id, 'goal', g.name)).join('');
+            document.getElementById('activityContainer').innerHTML = appData.activityLevels.map(a => createOption('radio', a.id, 'activity', a.name)).join('');
+            document.getElementById('sleepContainer').innerHTML = appData.sleepPatterns.map(s => createOption('radio', s.id, 'sleep', s.name)).join('');
+            document.getElementById('dietContainer').innerHTML = appData.dietTypes.map(d => createOption('radio', d.id, 'diet', d.name)).join('');
+            document.getElementById('conditionsContainer').innerHTML = appData.conditions.map(c => createOption('checkbox', c.id, 'condition', c.name)).join('');
+        }
+
+        function startQuestionnaire() {
+            heroSection.classList.add('hidden');
+            questionnaireSection.classList.remove('hidden');
+            updateUI();
+        }
+
+        function resetApp() {
+            dashboardSection.classList.add('hidden');
+            heroSection.classList.remove('hidden');
+            currentStep = 1;
+            userProfile = { age: null, sex: null, goal: null, activity: null, sleep: null, diet: null, conditions: [] };
+            moodHistory = [];
+            if (moodChart) moodChart.destroy();
+            document.getElementById('age').value = '';
+            document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(el => el.checked = false);
+            updateUI();
+        }
+
+        function handleNext() {
+            if (validateStep()) {
+                if (currentStep < totalSteps) {
+                    currentStep++;
+                    updateUI();
+                }
+            } else {
+                alert('Please complete all fields before proceeding.');
+            }
+        }
+
+        function handlePrev() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateUI();
+            }
+        }
+
+        function validateStep() {
+            switch(currentStep) {
+                case 1:
+                    const age = document.getElementById('age').value;
+                    const sex = document.querySelector('input[name="sex"]:checked');
+                    if (age && parseInt(age) > 0 && sex) {
+                        userProfile.age = parseInt(age);
+                        userProfile.sex = sex.value;
+                        return true;
+                    }
+                    return false;
+                case 2:
+                    const goal = document.querySelector('input[name="goal"]:checked');
+                    if (goal) { userProfile.goal = goal.value; return true; }
+                    return false;
+                case 3:
+                    const activity = document.querySelector('input[name="activity"]:checked');
+                    if (activity) { userProfile.activity = activity.value; return true; }
+                    return false;
+                case 4:
+                    const sleep = document.querySelector('input[name="sleep"]:checked');
+                    if (sleep) { userProfile.sleep = sleep.value; return true; }
+                    return false;
+                case 5:
+                    const diet = document.querySelector('input[name="diet"]:checked');
+                    if (diet) { userProfile.diet = diet.value; return true; }
+                    return false;
+                case 6:
+                    userProfile.conditions = Array.from(document.querySelectorAll('input[name="condition"]:checked')).map(el => el.value);
+                    return true; 
+                case 7:
+                    return document.getElementById('consentCheck').checked;
+                case 8:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        function updateUI() {
+            const progressPercentage = ((currentStep - 1) / (totalSteps - 1)) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+
+            steps.forEach((step, index) => {
+                const isCurrent = index + 1 === currentStep;
+                step.classList.toggle('hidden', !isCurrent);
+                step.classList.toggle('opacity-0', !isCurrent);
+            });
+            
+            prevBtn.disabled = currentStep === 1;
+            nextBtn.classList.toggle('hidden', currentStep === totalSteps);
+            generateBtn.classList.toggle('hidden', currentStep !== totalSteps);
+
+            if (currentStep === totalSteps) {
+                updateSummary();
+            }
+        }
+        
+        function updateSummary() {
+            const list = document.getElementById('summaryList');
+            const findName = (arr, id) => arr.find(item => item.id === id)?.name || 'Not specified';
+            
+            const selectedGoal = findName(appData.goals, userProfile.goal);
+            const selectedActivity = findName(appData.activityLevels, userProfile.activity);
+            const selectedSleep = findName(appData.sleepPatterns, userProfile.sleep);
+            const selectedDiet = findName(appData.dietTypes, userProfile.diet);
+            const selectedConditions = userProfile.conditions.map(cid => findName(appData.conditions, cid));
+
+            list.innerHTML = `
+                <li><strong>Profile:</strong> ${userProfile.age}-year-old ${userProfile.sex}</li>
+                <li><strong>Primary Goal:</strong> ${selectedGoal}</li>
+                <li><strong>Lifestyle:</strong> ${selectedActivity}, sleeping ${selectedSleep}, with a ${selectedDiet} diet.</li>
+                <li><strong>Conditions:</strong> ${selectedConditions.length > 0 ? selectedConditions.join(', ') : 'None selected'}</li>
+            `;
+        }
+
+        function showDashboard() {
+            if (!validateStep()) return;
+            questionnaireSection.classList.add('hidden');
+            dashboardSection.classList.remove('hidden');
+            
+            document.getElementById('dashboardDate').textContent = `Today is ${new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`;
+            
+            generateReport();
+            setupDashboard();
+            window.scrollTo(0, 0);
+        }
+        
+        function setupDashboard() {
+            const goal = appData.goals.find(g => g.id === userProfile.goal);
+            document.getElementById('todayGoal').textContent = goal.name;
+            document.getElementById('todayContent').innerHTML = `<p>${goal.details.action}</p>`;
+            
+            const moodCtx = document.getElementById('moodChart').getContext('2d');
+            moodChart = new Chart(moodCtx, {
+                type: 'line',
+                data: { labels: [], datasets: [{ label: 'Mood (1-5)', data: [], borderColor: '#10B981', tension: 0.1, fill: false }] },
+                options: { scales: { y: { beginAtZero: true, max: 5 } }, plugins: { legend: { display: false } } }
+            });
+        }
+
+        function switchTab(event) {
+            const targetTab = event.currentTarget.dataset.tab;
+            document.querySelectorAll('.dashboard-tab').forEach(tab => tab.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            document.querySelectorAll('.dashboard-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(targetTab).classList.add('active');
+        }
+
+        function saveJournalEntry() {
+            const entry = document.getElementById('journalEntry').value;
+            const status = document.getElementById('journalStatus');
+            if (entry.trim()) {
+                localStorage.setItem('journalEntry_today', entry);
+                status.textContent = 'Entry saved successfully!';
+                setTimeout(() => status.textContent = '', 3000);
+            }
+        }
+
+        function logMood(event) {
+            const moodValue = parseInt(event.currentTarget.dataset.mood);
+            const date = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            
+            const existingEntryIndex = moodHistory.findIndex(h => h.date === date);
+            if (existingEntryIndex !== -1) {
+                moodHistory[existingEntryIndex].value = moodValue;
+            } else {
+                moodHistory.push({ date, value: moodValue });
+            }
+
+            if (moodHistory.length > 7) moodHistory.shift(); 
+
+            moodChart.data.labels = moodHistory.map(h => h.date);
+            moodChart.data.datasets[0].data = moodHistory.map(h => h.value);
+            moodChart.update();
+
+            const status = document.getElementById('moodStatus');
+            status.textContent = `Logged today's mood. Thank you for checking in!`;
+            setTimeout(() => status.textContent = '', 3000);
+        }
+
+        function generateReport() {
+            const reportContainer = document.getElementById('fullReportContent');
+            reportContainer.innerHTML = ''; 
+            reportContainer.innerHTML += buildChapter1_Snapshot();
+            reportContainer.innerHTML += buildChapter2_GoalDeepDive();
+            reportContainer.innerHTML += buildChapter3_Lifestyle();
+            reportContainer.innerHTML += buildChapter4_Nutrition();
+            if (userProfile.conditions.length > 0) {
+                reportContainer.innerHTML += buildChapter5_Conditions();
+            }
+            reportContainer.innerHTML += buildChapter6_Preventative();
+            reportContainer.innerHTML += buildChapter7_Resources();
+        }
+        
+        function createChapter(title, icon, content) {
+            return `
+                <div class="border-b border-gray-200 pb-8 mb-8">
+                    <div class="flex items-center mb-4">
+                        <span class="flex items-center justify-center h-10 w-10 rounded-full bg-gray-100 text-xl mr-4 text-gray-600"><i class="fa-solid ${icon}"></i></span>
+                        <h3 class="text-2xl font-semibold text-gray-800">${title}</h3>
+                    </div>
+                    <div class="prose max-w-none text-gray-600 pl-14">${content}</div>
+                </div>`;
+        }
+
+        function buildChapter1_Snapshot() {
+            const selectedGoal = appData.goals.find(g => g.id === userProfile.goal);
+            const content = `
+                <p class="lead">This report is tailored to you, a <strong>${userProfile.age}-year-old ${userProfile.sex}</strong>. Your primary focus is on <strong>${selectedGoal.name}</strong>. This report provides a science-backed, actionable plan to help you achieve this goal while building a strong foundation of overall wellness.</p>
+                <p>We will explore your main goal, analyze key lifestyle factors like sleep and nutrition, and provide a roadmap for proactive health. Use this as your guide to making small, sustainable changes.</p>
+            `;
+            return createChapter('1. Your Personalized Health Snapshot', 'fa-user', content);
+        }
+        
+        function buildChapter2_GoalDeepDive() {
+            const goal = appData.goals.find(g => g.id === userProfile.goal);
+            const content = `
+                <p>Your primary goal is to <strong>${goal.name}</strong>. Let's break down why this is important and how you can achieve it.</p>
+                <div class="action-plan">
+                    <h4>Why It Matters: The Science</h4>
+                    <p>${goal.details.why}</p>
+                    <h4>Your Action Plan</h4>
+                    ${goal.details.action}
+                </div>`;
+            return createChapter('2. Deep Dive: Your Primary Goal', 'fa-trophy', content);
+        }
+
+        function buildChapter3_Lifestyle() {
+            const sleep = appData.sleepPatterns.find(s => s.id === userProfile.sleep);
+            const activity = appData.activityLevels.find(a => a.id === userProfile.activity);
+            let sleepAdvice = '';
+            if (userProfile.sleep === 'less_5' || userProfile.sleep === '5_6') {
+                sleepAdvice = `
+                    <h4>Improving Your Sleep</h4>
+                    <p>You're currently getting <strong>${sleep.name}</strong> of sleep. This is below the recommended 7-8 hours, which can impact everything from mood to metabolism. Prioritizing sleep is one of the most effective health changes you can make.</p>
+                    <div class="action-plan">
+                        <p><strong>Action Step:</strong> For the next week, try to get to bed 15-30 minutes earlier than usual. Create a 'power-down' hour before bed by dimming lights and avoiding screens. This helps your body produce melatonin, the sleep hormone, naturally.</p>
+                    </div>`;
+            } else {
+                sleepAdvice = `<h4>Your Sleep Habits</h4><p>You're getting <strong>${sleep.name}</strong> of sleep per night, which is great! To maintain this healthy habit, continue to prioritize a consistent sleep schedule, even on weekends, to keep your internal clock synchronized.</p>`;
+            }
+
+            let activityAdvice = '';
+            if (userProfile.activity === 'sedentary' || userProfile.activity === 'light') {
+                activityAdvice = `
+                    <h4>Boosting Your Activity</h4>
+                    <p>Your current activity level is <strong>${activity.name}</strong>. Increasing your daily movement will have profound benefits for your energy levels and long-term health.</p>
+                    <div class="action-plan">
+                        <p><strong>Action Step:</strong> Start by incorporating a 15-minute brisk walk into your daily routine. Find a time that works for you—a lunch break, after dinner—and stick to it. The goal is to make movement a non-negotiable part of your day.</p>
+                    </div>`;
+            } else {
+                activityAdvice = `<h4>Your Activity Level</h4><p>You are <strong>${activity.name}</strong>, which is fantastic! To keep things challenging and effective, consider incorporating variety into your routine. If you mostly do cardio, try adding two days of strength training. If you mostly lift weights, ensure you're getting enough cardiovascular exercise.</p>`;
+            }
+
+            const content = `${sleepAdvice}${activityAdvice}`;
+            return createChapter('3. Analysis: Sleep and Activity', 'fa-person-running', content);
+        }
+
+        function buildChapter4_Nutrition() {
+            const diet = appData.dietTypes.find(d => d.id === userProfile.diet);
+            let dietAdvice = '';
+            if (userProfile.diet === 'standard') {
+                dietAdvice = `
+                    <p>You've indicated a <strong>Standard Western</strong> dietary pattern. While convenient, this pattern is often high in processed foods, sodium, and unhealthy fats, which can contribute to inflammation and chronic disease. Shifting towards a more whole-foods-based diet is a powerful lever for improving your health.</p>
+                    <div class="action-plan">
+                        <h4>The 'One-Thing-a-Meal' Challenge:</h4>
+                        <p>Focus on adding, not just subtracting. For the next week, try to add one serving of vegetables to every lunch and dinner. This could be a side salad, a handful of spinach in a pasta dish, or some steamed broccoli. This simple habit crowds out less healthy options and boosts your nutrient intake.</p>
+                    </div>`;
+            } else {
+                dietAdvice = `
+                    <p>You're following a <strong>${diet.name}</strong> diet, which is a great foundation for health. This eating pattern is typically rich in nutrients and beneficial plant compounds.</p>
+                    <div class="action-plan">
+                        <h4>Optimize Your Plate:</h4>
+                        <p>To further enhance your diet, focus on variety. Aim to 'eat the rainbow' by incorporating fruits and vegetables of different colors throughout the week. Each color provides a unique set of vitamins, minerals, and antioxidants that work together to protect your body.</p>
+                    </div>`;
+            }
+            const content = `
+                <h4>Your Current Eating Pattern</h4>
+                ${dietAdvice}`;
+            return createChapter('4. Deep Dive: Your Nutrition', 'fa-carrot', content);
+        }
+
+        function buildChapter5_Conditions() {
+            const conditionsData = userProfile.conditions.map(cid => appData.conditions.find(c => c.id === cid));
+            const content = `
+                <p>Here is tailored advice for the conditions you selected. These science-backed lifestyle adjustments can work alongside your medical treatment to improve your well-being.</p>
+                ${conditionsData.map(c => `
+                    <div class="action-plan mt-4">
+                        <h4>Managing ${c.name}</h4>
+                        <p><strong>The Science:</strong> ${c.details.why}</p>
+                        <p><strong>Action Plan:</strong> ${c.details.action}</p>
+                    </div>`).join('')}`;
+            return createChapter('5. Managing Your Health Conditions', 'fa-heart-pulse', content);
+        }
+
+        function buildChapter6_Preventative() {
+            let ageBracket = userProfile.age >= 65 ? '65+' : (userProfile.age >= 40 ? '40-64' : '18-39');
+            const recommendations = appData.preventativeCare[userProfile.sex.toLowerCase()]?.[ageBracket] || [];
+            const content = `
+                <p>Based on your age and sex, here is a general checklist for preventative health screenings. Discuss these with your doctor to create a plan that's right for you.</p>
+                <ul class="list-none mt-4 space-y-2">
+                    ${recommendations.map(rec => {
+                        const parts = rec.split(' (');
+                        const main = parts[0];
+                        const detail = parts[1] ? parts[1].slice(0, -1) : 'As advised by your doctor.';
+                        return `<li><i class="fa-solid fa-check text-teal-600 mr-2"></i><strong>${main}</strong>: ${detail}</li>`;
+                    }).join('')}
+                </ul>`;
+            return createChapter('6. Your Proactive Health Roadmap', 'fa-calendar-check', content);
+        }
+
+        function buildChapter7_Resources() {
+            const content = `
+                <p>Your health journey is ongoing. Use these resources to continue learning and take the next steps. Remember to bring this report to your next doctor's appointment to facilitate a productive conversation.</p>
+                <div class="mt-4">
+                    <h4 class="font-semibold text-lg text-gray-700">Key Questions for Your Doctor:</h4>
+                    <ul class="list-disc pl-5 mt-2 space-y-1">
+                        <li>Based on this profile, are there any other screenings or tests you would recommend?</li>
+                        <li>How can I best integrate these lifestyle changes with my current treatment plan (if any)?</li>
+                        <li>Are there any specific local resources or specialists you would suggest for my goals?</li>
+                    </ul>
+                </div>`;
+            return createChapter('7. Your Resource Toolkit', 'fa-toolbox', content);
+        }
+
+        initializeApp();
+    });
+    </script>
+</body>
+</html>
