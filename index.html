@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vitalia - Your Personalized Health Plan v3.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -130,29 +129,43 @@
                         <div id="activityContainer" class="space-y-2"></div>
                     </div>
 
-                    <!-- Step 4: Sleep -->
+<!-- Step 4: Sleep -->
                     <div id="step4" class="step-card hidden opacity-0">
                         <h3 class="text-2xl font-semibold mb-2">How's your sleep?</h3>
                         <p class="text-gray-600 mb-6">Quality sleep is a cornerstone of health. How many hours do you typically get per night?</p>
                         <div id="sleepContainer" class="space-y-2"></div>
                     </div>
 
-                    <!-- Step 5: Diet -->
+                    <!-- Step 5: Stress -->
                     <div id="step5" class="step-card hidden opacity-0">
+                        <h3 class="text-2xl font-semibold mb-2">How stressed do you feel most days?</h3>
+                        <p class="text-gray-600 mb-6">Knowing this helps personalize mental wellness strategies.</p>
+                        <div id="stressContainer" class="space-y-2"></div>
+                    </div>
+
+                    <!-- Step 6: Diet -->
+                    <div id="step6" class="step-card hidden opacity-0">
                         <h3 class="text-2xl font-semibold mb-2">What does your diet look like?</h3>
                         <p class="text-gray-600 mb-6">Which of these best describes your typical eating pattern?</p>
                         <div id="dietContainer" class="space-y-2"></div>
                     </div>
 
-                    <!-- Step 6: Conditions -->
-                    <div id="step6" class="step-card hidden opacity-0">
+                    <!-- Step 7: Conditions -->
+                    <div id="step7" class="step-card hidden opacity-0">
                         <h3 class="text-2xl font-semibold mb-2">Do any of these apply to you?</h3>
                         <p class="text-gray-600 mb-6">Select any existing health conditions you're managing. This helps us tailor lifestyle and dietary advice. (Optional)</p>
                         <div id="conditionsContainer" class="space-y-2"></div>
                     </div>
-                    
-                    <!-- Step 7: Consent -->
-                    <div id="step7" class="step-card hidden opacity-0">
+
+                    <!-- Step 8: Approach -->
+                    <div id="step8" class="step-card hidden opacity-0">
+                        <h3 class="text-2xl font-semibold mb-2">Which style of guidance do you prefer?</h3>
+                        <p class="text-gray-600 mb-6">Choose the philosophical approach that resonates with you.</p>
+                        <div id="approachContainer" class="space-y-2"></div>
+                    </div>
+
+                    <!-- Step 9: Consent -->
+                    <div id="step9" class="step-card hidden opacity-0">
                         <h3 class="text-2xl font-semibold mb-2">Your Privacy & Consent</h3>
                         <p class="text-gray-600 mb-6">Please review and agree to our terms to continue. We are committed to protecting your data.</p>
                         <div class="space-y-4 bg-gray-50 p-4 rounded-lg border">
@@ -164,8 +177,8 @@
                         </div>
                     </div>
 
-                    <!-- Step 8: Summary -->
-                    <div id="step8" class="step-card hidden opacity-0 text-center">
+                    <!-- Step 10: Summary -->
+                    <div id="step10" class="step-card hidden opacity-0 text-center">
                         <h3 class="text-2xl font-semibold mb-2">Ready to see your plan?</h3>
                         <p class="text-gray-600 mb-6">We've gathered your information. Click below to generate your personalized wellness report.</p>
                         <div class="bg-gray-100 p-4 rounded-lg text-left mb-6">
@@ -193,8 +206,6 @@
                         <nav class="-mb-px flex space-x-6" aria-label="Tabs">
                             <button class="dashboard-tab active whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="tab-today">Today's Focus</button>
                             <button class="dashboard-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="tab-report">Full Report</button>
-                            <button class="dashboard-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="tab-journal">My Journal</button>
-                            <button class="dashboard-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="tab-mood">Mood Tracker</button>
                         </nav>
                     </div>
 
@@ -205,28 +216,6 @@
                         </div>
                         <div id="tab-report" class="dashboard-content">
                              <div class="space-y-12" id="fullReportContent"></div>
-                        </div>
-                        <div id="tab-journal" class="dashboard-content">
-                            <h3 class="text-xl font-semibold text-gray-800 mb-4">Daily Journal</h3>
-                            <p class="text-gray-600 mb-4">Journaling can help you process thoughts and feelings. What's on your mind today?</p>
-                            <textarea id="journalEntry" class="w-full h-48 p-3 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-500" placeholder="Start writing..."></textarea>
-                            <button id="saveJournalBtn" class="mt-4 inline-block rounded-md border border-transparent bg-gray-800 px-6 py-2 text-base font-medium text-white hover:bg-gray-700">Save Entry</button>
-                            <p id="journalStatus" class="text-sm text-green-600 mt-2"></p>
-                        </div>
-                        <div id="tab-mood" class="dashboard-content">
-                            <h3 class="text-xl font-semibold text-gray-800 mb-4">Mood Tracker</h3>
-                            <p class="text-gray-600 mb-4">How are you feeling today? Logging your mood helps you recognize patterns over time.</p>
-                            <div class="flex space-x-2 justify-center text-4xl mb-6">
-                                <button class="mood-btn p-2 rounded-full hover:bg-gray-200 transition" data-mood="1">😞</button>
-                                <button class="mood-btn p-2 rounded-full hover:bg-gray-200 transition" data-mood="2">😐</button>
-                                <button class="mood-btn p-2 rounded-full hover:bg-gray-200 transition" data-mood="3">🙂</button>
-                                <button class="mood-btn p-2 rounded-full hover:bg-gray-200 transition" data-mood="4">😊</button>
-                                <button class="mood-btn p-2 rounded-full hover:bg-gray-200 transition" data-mood="5">😁</button>
-                            </div>
-                            <p id="moodStatus" class="text-center text-sm text-green-600 mb-6"></p>
-                            <div class="chart-container" style="height:200px; max-width: 500px;">
-                                <canvas id="moodChart"></canvas>
-                            </div>
                         </div>
                     </div>
                     <div class="mt-12 text-center border-t pt-8">
@@ -295,6 +284,11 @@
                 {id: '7_8', name: '7-8 hours (Recommended)'},
                 {id: '9_plus', name: '9+ hours'}
             ],
+            stressLevels: [
+                {id: 'low', name: 'Low (rarely stressed)'},
+                {id: 'moderate', name: 'Moderate (some stress)'},
+                {id: 'high', name: 'High (often stressed)'}
+            ],
             dietTypes: [
                 {id: 'standard', name: 'Standard Western (Processed foods, red meat, refined grains)'},
                 {id: 'mediterranean', name: 'Mediterranean-Style (Fruits, veg, whole grains, fish, olive oil)'},
@@ -321,6 +315,11 @@
                   }
                 },
             ],
+            approachTypes: [
+                {id: 'evidence', name: 'Evidence-based guidance'},
+                {id: 'holistic', name: 'Holistic mind-body approach'},
+                {id: 'philosophical', name: 'Philosophical/Psychological insights'}
+            ],
             preventiveCare: {
                 female: {
                     '18-39': ['Blood Pressure Screening (every 1-2 years)', 'Cervical Cancer Screening (Pap test every 3 years)', 'Clinical Breast Exam (every 1-3 years)', 'Cholesterol Screening (if risk factors exist)'],
@@ -336,10 +335,8 @@
         };
 
         let currentStep = 1;
-        const totalSteps = 8;
-        let userProfile = { age: null, sex: null, goal: null, level: null, activity: null, sleep: null, diet: null, conditions: [] };
-        let moodHistory = [];
-        let moodChart;
+        const totalSteps = 10;
+        let userProfile = { age: null, sex: null, goal: null, level: null, activity: null, sleep: null, stress: null, diet: null, conditions: [], approach: null };
 
         const heroSection = document.getElementById('heroSection');
         const questionnaireSection = document.getElementById('questionnaireSection');
@@ -361,8 +358,6 @@
             restartBtn.addEventListener('click', resetApp);
             
             document.querySelectorAll('.dashboard-tab').forEach(tab => tab.addEventListener('click', switchTab));
-            document.getElementById('saveJournalBtn').addEventListener('click', saveJournalEntry);
-            document.querySelectorAll('.mood-btn').forEach(btn => btn.addEventListener('click', logMood));
         }
 
         function populateOptions() {
@@ -376,8 +371,10 @@
             document.getElementById('levelsContainer').innerHTML = appData.reportLevels.map(l => createOption('radio', l.id, 'level', l.name)).join('');
             document.getElementById('activityContainer').innerHTML = appData.activityLevels.map(a => createOption('radio', a.id, 'activity', a.name)).join('');
             document.getElementById('sleepContainer').innerHTML = appData.sleepPatterns.map(s => createOption('radio', s.id, 'sleep', s.name)).join('');
+            document.getElementById('stressContainer').innerHTML = appData.stressLevels.map(s => createOption('radio', s.id, 'stress', s.name)).join('');
             document.getElementById('dietContainer').innerHTML = appData.dietTypes.map(d => createOption('radio', d.id, 'diet', d.name)).join('');
             document.getElementById('conditionsContainer').innerHTML = appData.conditions.map(c => createOption('checkbox', c.id, 'condition', c.name)).join('');
+            document.getElementById('approachContainer').innerHTML = appData.approachTypes.map(a => createOption('radio', a.id, 'approach', a.name)).join('');
         }
 
         function startQuestionnaire() {
@@ -390,9 +387,7 @@
             dashboardSection.classList.add('hidden');
             heroSection.classList.remove('hidden');
             currentStep = 1;
-            userProfile = { age: null, sex: null, goal: null, level: null, activity: null, sleep: null, diet: null, conditions: [] };
-            moodHistory = [];
-            if (moodChart) moodChart.destroy();
+            userProfile = { age: null, sex: null, goal: null, level: null, activity: null, sleep: null, stress: null, diet: null, conditions: [], approach: null };
             document.getElementById('age').value = '';
             document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(el => el.checked = false);
             updateUI();
@@ -441,15 +436,23 @@
                     if (sleep) { userProfile.sleep = sleep.value; return true; }
                     return false;
                 case 5:
+                    const stress = document.querySelector('input[name="stress"]:checked');
+                    if (stress) { userProfile.stress = stress.value; return true; }
+                    return false;
+                case 6:
                     const diet = document.querySelector('input[name="diet"]:checked');
                     if (diet) { userProfile.diet = diet.value; return true; }
                     return false;
-                case 6:
-                    userProfile.conditions = Array.from(document.querySelectorAll('input[name="condition"]:checked')).map(el => el.value);
-                    return true; 
                 case 7:
-                    return document.getElementById('consentCheck').checked;
+                    userProfile.conditions = Array.from(document.querySelectorAll('input[name="condition"]:checked')).map(el => el.value);
+                    return true;
                 case 8:
+                    const approach = document.querySelector('input[name="approach"]:checked');
+                    if (approach) { userProfile.approach = approach.value; return true; }
+                    return false;
+                case 9:
+                    return document.getElementById('consentCheck').checked;
+                case 10:
                     return true;
                 default:
                     return false;
@@ -483,14 +486,17 @@
             const selectedLevel = findName(appData.reportLevels, userProfile.level);
             const selectedActivity = findName(appData.activityLevels, userProfile.activity);
             const selectedSleep = findName(appData.sleepPatterns, userProfile.sleep);
+            const selectedStress = findName(appData.stressLevels, userProfile.stress);
             const selectedDiet = findName(appData.dietTypes, userProfile.diet);
             const selectedConditions = userProfile.conditions.map(cid => findName(appData.conditions, cid));
+            const selectedApproach = findName(appData.approachTypes, userProfile.approach);
 
             list.innerHTML = `
                 <li><strong>Profile:</strong> ${userProfile.age}-year-old ${userProfile.sex}</li>
                 <li><strong>Primary Goal:</strong> ${selectedGoal}</li>
                 <li><strong>Report Level:</strong> ${selectedLevel}</li>
-                <li><strong>Lifestyle:</strong> ${selectedActivity}, sleeping ${selectedSleep}, with a ${selectedDiet} diet.</li>
+                <li><strong>Lifestyle:</strong> ${selectedActivity}, sleeping ${selectedSleep}, stress level: ${selectedStress}, with a ${selectedDiet} diet.</li>
+                <li><strong>Preferred Approach:</strong> ${selectedApproach}</li>
                 <li><strong>Conditions:</strong> ${selectedConditions.length > 0 ? selectedConditions.join(', ') : 'None selected'}</li>
             `;
         }
@@ -512,12 +518,6 @@
             document.getElementById('todayGoal').textContent = goal.name;
             document.getElementById('todayContent').innerHTML = goal.details.action;
             
-            const moodCtx = document.getElementById('moodChart').getContext('2d');
-            moodChart = new Chart(moodCtx, {
-                type: 'line',
-                data: { labels: [], datasets: [{ label: 'Mood (1-5)', data: [], borderColor: '#10B981', tension: 0.1, fill: false }] },
-                options: { scales: { y: { beginAtZero: true, max: 5 } }, plugins: { legend: { display: false } } }
-            });
         }
 
         function switchTab(event) {
@@ -528,37 +528,6 @@
             document.getElementById(targetTab).classList.add('active');
         }
 
-        function saveJournalEntry() {
-            const entry = document.getElementById('journalEntry').value;
-            const status = document.getElementById('journalStatus');
-            if (entry.trim()) {
-                localStorage.setItem('journalEntry_today', entry);
-                status.textContent = 'Entry saved successfully!';
-                setTimeout(() => status.textContent = '', 3000);
-            }
-        }
-
-        function logMood(event) {
-            const moodValue = parseInt(event.currentTarget.dataset.mood);
-            const date = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-            
-            const existingEntryIndex = moodHistory.findIndex(h => h.date === date);
-            if (existingEntryIndex !== -1) {
-                moodHistory[existingEntryIndex].value = moodValue;
-            } else {
-                moodHistory.push({ date, value: moodValue });
-            }
-
-            if (moodHistory.length > 7) moodHistory.shift(); 
-
-            moodChart.data.labels = moodHistory.map(h => h.date);
-            moodChart.data.datasets[0].data = moodHistory.map(h => h.value);
-            moodChart.update();
-
-            const status = document.getElementById('moodStatus');
-            status.textContent = `Logged today's mood. Thank you for checking in!`;
-            setTimeout(() => status.textContent = '', 3000);
-        }
 
         function generateReport() {
             const reportContainer = document.getElementById('fullReportContent');
