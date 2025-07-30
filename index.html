@@ -497,7 +497,7 @@
         function setupDashboard() {
             const goal = appData.goals.find(g => g.id === userProfile.goal);
             document.getElementById('todayGoal').textContent = goal.name;
-            document.getElementById('todayContent').innerHTML = `<p>${goal.details.action}</p>`;
+            document.getElementById('todayContent').innerHTML = goal.details.action;
             
             const moodCtx = document.getElementById('moodChart').getContext('2d');
             moodChart = new Chart(moodCtx, {
