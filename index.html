@@ -116,7 +116,11 @@
                     <div id="step2" class="step-card hidden opacity-0">
                         <h3 class="text-2xl font-semibold mb-2">What's your primary wellness goal?</h3>
                         <p class="text-gray-600 mb-6">Choose one area to focus on. Your report will provide a detailed, actionable plan for this goal.</p>
-                        <div id="goalsContainer" class="space-y-2"></div>
+                        <div id="goalsContainer" class="space-y-2 mb-6"></div>
+
+                        <h3 class="text-2xl font-semibold mb-2 mt-4">How detailed should your report be?</h3>
+                        <p class="text-gray-600 mb-6">Choose the depth of guidance you want.</p>
+                        <div id="levelsContainer" class="space-y-2"></div>
                     </div>
                     
                     <!-- Step 3: Activity -->
@@ -274,6 +278,11 @@
                   }
                 },
             ],
+            reportLevels: [
+                { id: 'level1', name: 'Level 1: Intro Snapshot' },
+                { id: 'level2', name: 'Level 2: Comprehensive' },
+                { id: 'level3', name: 'Level 3: Advanced' }
+            ],
             activityLevels: [
                 {id: 'sedentary', name: 'Mostly Sedentary (Little to no intentional exercise)'},
                 {id: 'light', name: 'Lightly Active (e.g., walking 1-2 days/week)'},
@@ -328,7 +337,7 @@
 
         let currentStep = 1;
         const totalSteps = 8;
-        let userProfile = { age: null, sex: null, goal: null, activity: null, sleep: null, diet: null, conditions: [] };
+        let userProfile = { age: null, sex: null, goal: null, level: null, activity: null, sleep: null, diet: null, conditions: [] };
         let moodHistory = [];
         let moodChart;
 
@@ -364,6 +373,7 @@
                 </label>`;
             
             document.getElementById('goalsContainer').innerHTML = appData.goals.map(g => createOption('radio', g.id, 'goal', g.name)).join('');
+            document.getElementById('levelsContainer').innerHTML = appData.reportLevels.map(l => createOption('radio', l.id, 'level', l.name)).join('');
             document.getElementById('activityContainer').innerHTML = appData.activityLevels.map(a => createOption('radio', a.id, 'activity', a.name)).join('');
             document.getElementById('sleepContainer').innerHTML = appData.sleepPatterns.map(s => createOption('radio', s.id, 'sleep', s.name)).join('');
             document.getElementById('dietContainer').innerHTML = appData.dietTypes.map(d => createOption('radio', d.id, 'diet', d.name)).join('');
@@ -380,7 +390,7 @@
             dashboardSection.classList.add('hidden');
             heroSection.classList.remove('hidden');
             currentStep = 1;
-            userProfile = { age: null, sex: null, goal: null, activity: null, sleep: null, diet: null, conditions: [] };
+            userProfile = { age: null, sex: null, goal: null, level: null, activity: null, sleep: null, diet: null, conditions: [] };
             moodHistory = [];
             if (moodChart) moodChart.destroy();
             document.getElementById('age').value = '';
@@ -419,7 +429,8 @@
                     return false;
                 case 2:
                     const goal = document.querySelector('input[name="goal"]:checked');
-                    if (goal) { userProfile.goal = goal.value; return true; }
+                    const level = document.querySelector('input[name="level"]:checked');
+                    if (goal && level) { userProfile.goal = goal.value; userProfile.level = level.value; return true; }
                     return false;
                 case 3:
                     const activity = document.querySelector('input[name="activity"]:checked');
@@ -469,6 +480,7 @@
             const findName = (arr, id) => arr.find(item => item.id === id)?.name || 'Not specified';
             
             const selectedGoal = findName(appData.goals, userProfile.goal);
+            const selectedLevel = findName(appData.reportLevels, userProfile.level);
             const selectedActivity = findName(appData.activityLevels, userProfile.activity);
             const selectedSleep = findName(appData.sleepPatterns, userProfile.sleep);
             const selectedDiet = findName(appData.dietTypes, userProfile.diet);
@@ -477,6 +489,7 @@
             list.innerHTML = `
                 <li><strong>Profile:</strong> ${userProfile.age}-year-old ${userProfile.sex}</li>
                 <li><strong>Primary Goal:</strong> ${selectedGoal}</li>
+                <li><strong>Report Level:</strong> ${selectedLevel}</li>
                 <li><strong>Lifestyle:</strong> ${selectedActivity}, sleeping ${selectedSleep}, with a ${selectedDiet} diet.</li>
                 <li><strong>Conditions:</strong> ${selectedConditions.length > 0 ? selectedConditions.join(', ') : 'None selected'}</li>
             `;
@@ -549,16 +562,47 @@
 
         function generateReport() {
             const reportContainer = document.getElementById('fullReportContent');
-            reportContainer.innerHTML = ''; 
-            reportContainer.innerHTML += buildChapter1_Snapshot();
-            reportContainer.innerHTML += buildChapter2_GoalDeepDive();
-            reportContainer.innerHTML += buildChapter3_Lifestyle();
-            reportContainer.innerHTML += buildChapter4_Nutrition();
-            if (userProfile.conditions.length > 0) {
-                reportContainer.innerHTML += buildChapter5_Conditions();
+            reportContainer.innerHTML = '';
+
+            if (userProfile.level === 'level1') {
+                generateReportLevel1(reportContainer);
+            } else if (userProfile.level === 'level2') {
+                generateReportLevel2(reportContainer);
+            } else {
+                generateReportLevel3(reportContainer);
             }
-            reportContainer.innerHTML += buildChapter6_Preventive();
-            reportContainer.innerHTML += buildChapter7_Resources();
+        }
+
+        function generateReportLevel2(container) {
+            container.innerHTML += buildChapter1_Snapshot();
+            container.innerHTML += buildChapter2_GoalDeepDive();
+            container.innerHTML += buildChapter3_Lifestyle();
+            container.innerHTML += buildChapter4_Nutrition();
+            if (userProfile.conditions.length > 0) {
+                container.innerHTML += buildChapter5_Conditions();
+            }
+            container.innerHTML += buildChapter6_Preventive();
+            container.innerHTML += buildChapter7_Resources();
+        }
+
+        function generateReportLevel1(container) {
+            const goal = appData.goals.find(g => g.id === userProfile.goal);
+            const sleep = appData.sleepPatterns.find(s => s.id === userProfile.sleep);
+            const activity = appData.activityLevels.find(a => a.id === userProfile.activity);
+            const summary = `<p>You are a <strong>${userProfile.age}-year-old ${userProfile.sex}</strong> focused on <strong>${goal.name}</strong>.</p>`;
+            const lifestyle = `<p>Current activity level: <strong>${activity.name}</strong>. Typical sleep: <strong>${sleep.name}</strong>.</p>`;
+            const opportunity = `<div class="action-plan">${goal.details.action}</div>`;
+            const reflection = `<p>Focus on small daily habits for lasting change.</p>`;
+
+            container.innerHTML += createChapter('Personal Summary', 'fa-user', summary);
+            container.innerHTML += createChapter('Lifestyle Assessment', 'fa-heart-pulse', lifestyle);
+            container.innerHTML += createChapter('One Major Opportunity', 'fa-bullseye', opportunity);
+            container.innerHTML += createChapter('Motivational Reflection', 'fa-seedling', reflection);
+        }
+
+        function generateReportLevel3(container) {
+            generateReportLevel2(container);
+            container.innerHTML += buildChapter8_Advanced();
         }
         
         function createChapter(title, icon, content) {
@@ -690,6 +734,13 @@
                     </ul>
                 </div>`;
             return createChapter('7. Your Resource Toolkit', 'fa-toolbox', content);
+        }
+
+        function buildChapter8_Advanced() {
+            const content = `
+                <p>For maximum results, track your progress weekly. Consider using a wearable device or journal to monitor sleep, activity, and nutrition.</p>
+                <p>Adjust your plan every few weeks based on how your body responds. If possible, consult professionals like trainers or dietitians to fine-tune your approach.</p>`;
+            return createChapter('8. Continuous Feedback & Optimization', 'fa-chart-line', content);
         }
 
         initializeApp();
