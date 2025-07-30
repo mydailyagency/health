@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-background text-text font-sans;
+}
+
+.btn {
+  @apply bg-primary text-white px-6 py-3 rounded-lg shadow hover:bg-sky-600;
+}
