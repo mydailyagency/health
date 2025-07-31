@@ -1,47 +1,456 @@
 [
-  {"id":"Q1","section":"Demographics","text":"What is your date of birth (or age)?","input_type":"date_or_number","required":true,"help_text":"Age helps us select appropriate targets and screening prompts.","maps_to":"demographics.age","feeds_rules":["DM-001","DM-009"]},
-  {"id":"Q2","section":"Demographics","text":"What is your sex at birth?","input_type":"single_choice","required":true,"options":["male","female","prefer_not_say"],"maps_to":"demographics.sex","feeds_rules":["MOD-005","MOD-006","MOV-006"]},
-  {"id":"Q3","section":"Demographics","text":"Which best describes your current hormonal stage (if applicable)?","input_type":"single_choice","show_if":"Q2 in ['male','female']","options":["none","menstruating","perimenopause","menopause","pregnant","postpartum","andropause","TRT"],"maps_to":"demographics.hormonal_stage","feeds_rules":["MOD-005","MOD-006","MOV-006"]},
-  {"id":"Q4","section":"Demographics","text":"What is your height?","input_type":"number_cm","required":true,"min":100,"max":250,"maps_to":"body.height_cm","feeds_rules":["DM-001","DM-002"]},
-  {"id":"Q5","section":"Demographics","text":"What is your current weight?","input_type":"number_kg","required":true,"min":30,"max":300,"maps_to":"body.weight_kg","feeds_rules":["DM-001"]},
-  {"id":"Q6","section":"Demographics","text":"What is your waist measurement (at the navel)?","input_type":"number_cm","required":false,"min":40,"max":200,"help_text":"Use a soft tape; exhale normally; measure at the level of the belly button.","maps_to":"body.waist_cm","feeds_rules":["DM-002"]},
-  {"id":"Q7","section":"Goals","text":"What are your top 2–3 health goals?","input_type":"multi_choice","required":true,"max_choices":3,"options":["fat_loss","muscle_gain","strength","endurance","energy","sleep","stress","longevity","mobility","pain_reduction","metabolic_health"],"maps_to":"goals","feeds_rules":["DM-006","DM-009","L1-001"]},
-  {"id":"Q8","section":"Goals","text":"Which goal do you want to focus on first?","input_type":"single_choice","required":true,"options_dynamic_from":"Q7","maps_to":"goals.primary_focus","feeds_rules":["DM-009"]},
-  {"id":"Q8B","section":"Goals","text":"In your own words, what would success look like in 12 weeks?","input_type":"text","required":false,"placeholder":"e.g., down 10 lb, sleep 7.5h, BP under 130/80","maps_to":"goals.success_statement"},
-  {"id":"Q9","section":"Activity","text":"On average, how many steps do you take per day?","input_type":"single_choice","required":true,"options":["<3000","3000-5000","5000-7500","7500-10000",">10000"],"maps_to":"activity.baseline_steps","feeds_rules":["DM-003","MOV-002"]},
-  {"id":"Q10","section":"Activity","text":"How much cardio do you get in a typical week?","input_type":"single_choice","required":true,"options":["none","<60 min","60-150 min","150-300 min",">300 min"],"maps_to":"activity.cv_minutes_week","feeds_rules":["DM-003","MOV-001"]},
-  {"id":"Q11","section":"Activity","text":"How often do you perform strength/resistance training?","input_type":"single_choice","required":true,"options":["never","1","2","3+"],"maps_to":"activity.resistance_days_week","feeds_rules":["MOV-003","MOV-006"]},
-  {"id":"Q12","section":"Activity","text":"Do you currently have any injuries or movement limitations?","input_type":"yes_no","required":false,"maps_to":"activity.limitations_flag"},
-  {"id":"Q12A","section":"Activity","text":"Briefly describe any injuries/limitations.","input_type":"text","required":false,"show_if":"Q12 == true","maps_to":"activity.limitations_notes"},
-  {"id":"Q13","section":"Sleep","text":"On average, how many hours of sleep do you get per night?","input_type":"number_hours","required":true,"min":3,"max":12,"maps_to":"sleep.avg_hours","feeds_rules":["DM-005","SLP-001","SLP-002"]},
-  {"id":"Q13B","section":"Sleep","text":"How regular is your sleep schedule?","input_type":"single_choice","required":false,"options":["very_regular","somewhat_regular","irregular"],"maps_to":"sleep.regularity"},
-  {"id":"Q14","section":"Sleep","text":"Do you work night or rotating shifts?","input_type":"yes_no","required":true,"maps_to":"sleep.shift_work","feeds_rules":["SLP-003"]},
-  {"id":"Q15","section":"Sleep","text":"Do you have trouble falling asleep or staying asleep 3+ nights/week?","input_type":"yes_no","required":true,"maps_to":"sleep.insomnia_flag","feeds_rules":["SLP-004"]},
-  {"id":"Q16","section":"Sleep","text":"Has anyone told you that you snore loudly or stop breathing during sleep?","input_type":"yes_no","required":true,"maps_to":"sleep.osa_risk","feeds_rules":["DM-007","MOD-012","SLP-005"]},
-  {"id":"Q16B","section":"Sleep","text":"How refreshed do you feel on waking?","input_type":"single_choice","required":false,"options":["refreshed","somewhat_refreshed","not_refreshed"],"maps_to":"sleep.refreshment"},
-  {"id":"Q18","section":"Nutrition","text":"Which best describes your eating pattern?","input_type":"single_choice","required":true,"options":["omnivore","mediterranean","vegetarian","vegan","gluten_free","lactose_free","keto","other"],"maps_to":"diet.pattern","feeds_rules":["NUT-004","NUT-009","MOD-011"]},
-  {"id":"Q18B","section":"Nutrition","text":"Where do you get most of your meals?","input_type":"single_choice","required":false,"options":["mostly_cook","mostly_eat_out","mix"],"maps_to":"diet.cooking_confidence"},
-  {"id":"Q19","section":"Nutrition","text":"How many meals (or large snacks) do you typically eat per day?","input_type":"number","required":false,"min":1,"max":8,"maps_to":"diet.meals_per_day"},
-  {"id":"Q20","section":"Nutrition","text":"How often do you drink alcohol?","input_type":"single_choice","required":false,"options":["never","1-2/week","3-7/week","8+/week"],"maps_to":"diet.alcohol_units_week","feeds_rules":["NUT-005"]},
-  {"id":"Q21","section":"Nutrition","text":"Do you have difficulty accessing affordable, healthy foods?","input_type":"yes_no","required":false,"maps_to":"diet.food_access","feeds_rules":["MOD-011"]},
-  {"id":"Q23","section":"Medical","text":"Have you ever been told you have any of the following?","input_type":"multi_choice","required":false,"options":["prediabetes","t2d","htn","dyslipidemia","obesity","pcos","ckd","asthma","copd","cad","stroke","nafld","gerd","ibs","celiac","hypothyroid","hyperthyroid","depression","anxiety","adhd","chronic_pain","osteoarthritis","osteopenia","osteoporosis","osa","none"],"maps_to":"health.diagnoses","feeds_rules":["MOD-001","MOD-002","MOD-003","MOD-004","MOD-007","MOD-008","MOD-009","MOD-010"]},
-  {"id":"Q24","section":"Medical","text":"Do you know your average blood pressure? (systolic/diastolic)","input_type":"number_pair","required":false,"show_if":"Q23 includes 'htn'","maps_to":["vitals.home_bp_sbp","vitals.home_bp_dbp"],"feeds_rules":["DM-004","MOD-001"]},
-  {"id":"Q24B","section":"Medical","text":"Do you track your resting heart rate? If yes, what is it typically?","input_type":"number","required":false,"min":35,"max":140,"maps_to":"vitals.resting_hr"},
-  {"id":"Q26","section":"Medical","text":"Do you have recent lab results you want to enter?","input_type":"yes_no","required":false,"maps_to":"labs.has_labs"},
-  {"id":"Q26A","section":"Medical","text":"Hemoglobin A1c (%)","input_type":"number","required":false,"min":4.0,"max":15.0,"show_if":"Q26 == true","maps_to":"labs.a1c"},
-  {"id":"Q26B","section":"Medical","text":"Fasting glucose (mg/dL)","input_type":"number","required":false,"min":60,"max":300,"show_if":"Q26 == true","maps_to":"labs.fasting_glucose"},
-  {"id":"Q26C","section":"Medical","text":"LDL cholesterol (mg/dL)","input_type":"number","required":false,"min":30,"max":300,"show_if":"Q26 == true","maps_to":"labs.ldl"},
-  {"id":"Q26D","section":"Medical","text":"Triglycerides (mg/dL)","input_type":"number","required":false,"min":20,"max":1000,"show_if":"Q26 == true","maps_to":"labs.tg"},
-  {"id":"Q26E","section":"Medical","text":"eGFR (mL/min/1.73m²)","input_type":"number","required":false,"min":5,"max":200,"show_if":"Q26 == true","maps_to":"labs.egfr"},
-  {"id":"Q27","section":"Mental Health","text":"Over the last 2 weeks, how often have you had little interest or pleasure in doing things?","input_type":"phq2_scale","required":false,"maps_to":"screening.phq2","feeds_rules":["DM-007","MEN-002"]},
-  {"id":"Q29","section":"Mental Health","text":"Over the last 2 weeks, how often have you felt nervous, anxious, or on edge?","input_type":"gad2_scale","required":false,"maps_to":"screening.gad2","feeds_rules":["DM-007","MEN-002"]},
-  {"id":"Q29B","section":"Mental Health","text":"How stressed do you feel most days?","input_type":"scale_0_10","required":false,"maps_to":"screening.stress_0_10"},
-  {"id":"Q30","section":"Environment","text":"What best describes your work pattern?","input_type":"single_choice","required":false,"options":["standard","shift","rotating","gig","student","caregiving"],"maps_to":"environment.work_pattern"},
-  {"id":"Q31","section":"Barriers","text":"What are your biggest barriers to improving your health? (pick up to 3)","input_type":"multi_choice","required":false,"max_choices":3,"options":["time","stress","pain","motivation","budget","food_access","equipment","knowledge","other"],"maps_to":"readiness.barriers","feeds_rules":["ENV-003","L2-002"]},
-  {"id":"Q32","section":"Barriers","text":"How confident are you in your ability to make changes right now?","input_type":"scale_0_10","required":false,"maps_to":"readiness.confidence_0_10","feeds_rules":["L2-002"]},
-  {"id":"Q33","section":"Environment","text":"How often do you travel for work or life?","input_type":"single_choice","required":false,"options":["never","monthly","weekly"],"maps_to":"environment.travel_frequency"},
-  {"id":"Q34","section":"Supplements","text":"Do you currently take any supplements regularly?","input_type":"yes_no","required":false,"maps_to":"diet.supplements_flag"},
-  {"id":"Q34A","section":"Supplements","text":"List any supplements you take (optional).","input_type":"text","required":false,"show_if":"Q34 == true","maps_to":"diet.supplements_list"},
-  {"id":"Q35","section":"Safety","text":"Has a clinician ever told you to avoid exercise or only exercise under supervision?","input_type":"yes_no","required":false,"maps_to":"screening.par_q_plus_flag"},
-  {"id":"Q36","section":"Safety","text":"Do you get chest pain, severe shortness of breath, or dizziness with exercise?","input_type":"yes_no","required":false,"maps_to":"screening.exercise_risk_flag"}
+  /* ========== SECTION: Demographics & Profile ========== */
+  {
+    "id": "Q1",
+    "section": "Demographics",
+    "text": "What is your date of birth (or age)?",
+    "input_type": "date_or_number",
+    "required": true,
+    "help_text": "Age helps us select appropriate targets and screening prompts.",
+    "maps_to": "demographics.age",
+    "feeds_rules": ["DM-001","DM-009"]
+  },
+  {
+    "id": "Q2",
+    "section": "Demographics",
+    "text": "What is your sex at birth?",
+    "input_type": "single_choice",
+    "required": true,
+    "options": ["male","female","prefer_not_say"],
+    "maps_to": "demographics.sex",
+    "feeds_rules": ["MOD-005","MOD-006","MOV-006"]
+  },
+  {
+    "id": "Q3",
+    "section": "Demographics",
+    "text": "Which best describes your current hormonal stage (if applicable)?",
+    "input_type": "single_choice",
+    "show_if": "Q2 in ['male','female']",
+    "options": ["none","menstruating","perimenopause","menopause","pregnant","postpartum","andropause","TRT"],
+    "maps_to": "demographics.hormonal_stage",
+    "feeds_rules": ["MOD-005","MOD-006","MOV-006"]
+  },
+  {
+    "id": "Q4",
+    "section": "Demographics",
+    "text": "What is your height?",
+    "input_type": "number_cm",
+    "required": true,
+    "min": 100,
+    "max": 250,
+    "maps_to": "body.height_cm",
+    "feeds_rules": ["DM-001","DM-002"]
+  },
+  {
+    "id": "Q5",
+    "section": "Demographics",
+    "text": "What is your current weight?",
+    "input_type": "number_kg",
+    "required": true,
+    "min": 30,
+    "max": 300,
+    "maps_to": "body.weight_kg",
+    "feeds_rules": ["DM-001"]
+  },
+  {
+    "id": "Q6",
+    "section": "Demographics",
+    "text": "What is your waist measurement (at the navel)?",
+    "input_type": "number_cm",
+    "required": false,
+    "min": 40,
+    "max": 200,
+    "help_text": "Use a soft tape; exhale normally; measure at the level of the belly button.",
+    "maps_to": "body.waist_cm",
+    "feeds_rules": ["DM-002"]
+  },
+
+  /* ========== SECTION: Goals & Priorities ========== */
+  {
+    "id": "Q7",
+    "section": "Goals",
+    "text": "What are your top 2–3 health goals?",
+    "input_type": "multi_choice",
+    "required": true,
+    "max_choices": 3,
+    "options": ["fat_loss","muscle_gain","strength","endurance","energy","sleep","stress","longevity","mobility","pain_reduction","metabolic_health"],
+    "maps_to": "goals",
+    "feeds_rules": ["DM-006","DM-009","L1-001"]
+  },
+  {
+    "id": "Q8",
+    "section": "Goals",
+    "text": "Which goal do you want to focus on first?",
+    "input_type": "single_choice",
+    "required": true,
+    "options_dynamic_from": "Q7",
+    "maps_to": "goals.primary_focus",
+    "feeds_rules": ["DM-009"]
+  },
+  {
+    "id": "Q8B",
+    "section": "Goals",
+    "text": "In your own words, what would success look like in 12 weeks?",
+    "input_type": "text",
+    "required": false,
+    "placeholder": "e.g., down 10 lb, sleep 7.5h, BP under 130/80",
+    "maps_to": "goals.success_statement"
+  },
+
+  /* ========== SECTION: Activity & Fitness ========== */
+  {
+    "id": "Q9",
+    "section": "Activity",
+    "text": "On average, how many steps do you take per day?",
+    "input_type": "single_choice",
+    "required": true,
+    "options": ["<3000","3000-5000","5000-7500","7500-10000",">10000"],
+    "maps_to": "activity.baseline_steps",
+    "feeds_rules": ["DM-003","MOV-002"]
+  },
+  {
+    "id": "Q10",
+    "section": "Activity",
+    "text": "How much cardio do you get in a typical week?",
+    "input_type": "single_choice",
+    "required": true,
+    "options": ["none","<60 min","60-150 min","150-300 min",">300 min"],
+    "maps_to": "activity.cv_minutes_week",
+    "feeds_rules": ["DM-003","MOV-001"]
+  },
+  {
+    "id": "Q11",
+    "section": "Activity",
+    "text": "How often do you perform strength/resistance training?",
+    "input_type": "single_choice",
+    "required": true,
+    "options": ["never","1","2","3+"],
+    "maps_to": "activity.resistance_days_week",
+    "feeds_rules": ["MOV-003","MOV-006"]
+  },
+  {
+    "id": "Q12",
+    "section": "Activity",
+    "text": "Do you currently have any injuries or movement limitations?",
+    "input_type": "yes_no",
+    "required": false,
+    "maps_to": "activity.limitations_flag"
+  },
+  {
+    "id": "Q12A",
+    "section": "Activity",
+    "text": "Briefly describe any injuries/limitations.",
+    "input_type": "text",
+    "required": false,
+    "show_if": "Q12 == true",
+    "maps_to": "activity.limitations_notes"
+  },
+
+  /* ========== SECTION: Sleep & Recovery ========== */
+  {
+    "id": "Q13",
+    "section": "Sleep",
+    "text": "On average, how many hours of sleep do you get per night?",
+    "input_type": "number_hours",
+    "required": true,
+    "min": 3,
+    "max": 12,
+    "maps_to": "sleep.avg_hours",
+    "feeds_rules": ["DM-005","SLP-001","SLP-002"]
+  },
+  {
+    "id": "Q13B",
+    "section": "Sleep",
+    "text": "How regular is your sleep schedule?",
+    "input_type": "single_choice",
+    "required": false,
+    "options": ["very_regular","somewhat_regular","irregular"],
+    "maps_to": "sleep.regularity"
+  },
+  {
+    "id": "Q14",
+    "section": "Sleep",
+    "text": "Do you work night or rotating shifts?",
+    "input_type": "yes_no",
+    "required": true,
+    "maps_to": "sleep.shift_work",
+    "feeds_rules": ["SLP-003"]
+  },
+  {
+    "id": "Q15",
+    "section": "Sleep",
+    "text": "Do you have trouble falling asleep or staying asleep 3+ nights/week?",
+    "input_type": "yes_no",
+    "required": true,
+    "maps_to": "sleep.insomnia_flag",
+    "feeds_rules": ["SLP-004"]
+  },
+  {
+    "id": "Q16",
+    "section": "Sleep",
+    "text": "Has anyone told you that you snore loudly or stop breathing during sleep?",
+    "input_type": "yes_no",
+    "required": true,
+    "maps_to": "sleep.osa_risk",
+    "feeds_rules": ["DM-007","MOD-012","SLP-005"]
+  },
+  {
+    "id": "Q16B",
+    "section": "Sleep",
+    "text": "How refreshed do you feel on waking?",
+    "input_type": "single_choice",
+    "required": false,
+    "options": ["refreshed","somewhat_refreshed","not_refreshed"],
+    "maps_to": "sleep.refreshment"
+  },
+
+  /* ========== SECTION: Nutrition & Diet Pattern ========== */
+  {
+    "id": "Q18",
+    "section": "Nutrition",
+    "text": "Which best describes your eating pattern?",
+    "input_type": "single_choice",
+    "required": true,
+    "options": ["omnivore","mediterranean","vegetarian","vegan","gluten_free","lactose_free","keto","other"],
+    "maps_to": "diet.pattern",
+    "feeds_rules": ["NUT-004","NUT-009","MOD-011"]
+  },
+  {
+    "id": "Q18B",
+    "section": "Nutrition",
+    "text": "Where do you get most of your meals?",
+    "input_type": "single_choice",
+    "required": false,
+    "options": ["mostly_cook","mostly_eat_out","mix"],
+    "maps_to": "diet.cooking_confidence"
+  },
+  {
+    "id": "Q19",
+    "section": "Nutrition",
+    "text": "How many meals (or large snacks) do you typically eat per day?",
+    "input_type": "number",
+    "required": false,
+    "min": 1,
+    "max": 8,
+    "maps_to": "diet.meals_per_day"
+  },
+  {
+    "id": "Q20",
+    "section": "Nutrition",
+    "text": "How often do you drink alcohol?",
+    "input_type": "single_choice",
+    "required": false,
+    "options": ["never","1-2/week","3-7/week","8+/week"],
+    "maps_to": "diet.alcohol_units_week",
+    "feeds_rules": ["NUT-005"]
+  },
+  {
+    "id": "Q21",
+    "section": "Nutrition",
+    "text": "Do you have difficulty accessing affordable, healthy foods?",
+    "input_type": "yes_no",
+    "required": false,
+    "maps_to": "diet.food_access",
+    "feeds_rules": ["MOD-011"]
+  },
+
+  /* ========== SECTION: Medical History & Vitals ========== */
+  {
+    "id": "Q23",
+    "section": "Medical",
+    "text": "Have you ever been told you have any of the following?",
+    "input_type": "multi_choice",
+    "required": false,
+    "options": ["prediabetes","t2d","htn","dyslipidemia","obesity","pcos","ckd","asthma","copd","cad","stroke","nafld","gerd","ibs","celiac","hypothyroid","hyperthyroid","depression","anxiety","adhd","chronic_pain","osteoarthritis","osteopenia","osteoporosis","osa","none"],
+    "maps_to": "health.diagnoses",
+    "feeds_rules": ["MOD-001","MOD-002","MOD-003","MOD-004","MOD-007","MOD-008","MOD-009","MOD-010"]
+  },
+  {
+    "id": "Q24",
+    "section": "Medical",
+    "text": "Do you know your average blood pressure? (systolic/diastolic)",
+    "input_type": "number_pair",
+    "required": false,
+    "show_if": "Q23 includes 'htn'",
+    "maps_to": ["vitals.home_bp_sbp","vitals.home_bp_dbp"],
+    "feeds_rules": ["DM-004","MOD-001"]
+  },
+  {
+    "id": "Q24B",
+    "section": "Medical",
+    "text": "Do you track your resting heart rate? If yes, what is it typically?",
+    "input_type": "number",
+    "required": false,
+    "min": 35,
+    "max": 140,
+    "maps_to": "vitals.resting_hr"
+  },
+  {
+    "id": "Q26",
+    "section": "Medical",
+    "text": "Do you have recent lab results you want to enter?",
+    "input_type": "yes_no",
+    "required": false,
+    "maps_to": "labs.has_labs"
+  },
+  {
+    "id": "Q26A",
+    "section": "Medical",
+    "text": "Hemoglobin A1c (%)",
+    "input_type": "number",
+    "required": false,
+    "min": 4.0,
+    "max": 15.0,
+    "show_if": "Q26 == true",
+    "maps_to": "labs.a1c"
+  },
+  {
+    "id": "Q26B",
+    "section": "Medical",
+    "text": "Fasting glucose (mg/dL)",
+    "input_type": "number",
+    "required": false,
+    "min": 60,
+    "max": 300,
+    "show_if": "Q26 == true",
+    "maps_to": "labs.fasting_glucose"
+  },
+  {
+    "id": "Q26C",
+    "section": "Medical",
+    "text": "LDL cholesterol (mg/dL)",
+    "input_type": "number",
+    "required": false,
+    "min": 30,
+    "max": 300,
+    "show_if": "Q26 == true",
+    "maps_to": "labs.ldl"
+  },
+  {
+    "id": "Q26D",
+    "section": "Medical",
+    "text": "Triglycerides (mg/dL)",
+    "input_type": "number",
+    "required": false,
+    "min": 20,
+    "max": 1000,
+    "show_if": "Q26 == true",
+    "maps_to": "labs.tg"
+  },
+  {
+    "id": "Q26E",
+    "section": "Medical",
+    "text": "eGFR (mL/min/1.73m²)",
+    "input_type": "number",
+    "required": false,
+    "min": 5,
+    "max": 200,
+    "show_if": "Q26 == true",
+    "maps_to": "labs.egfr"
+  },
+
+  /* ========== SECTION: Mental Health & Stress ========== */
+  {
+    "id": "Q27",
+    "section": "Mental Health",
+    "text": "Over the last 2 weeks, how often have you had little interest or pleasure in doing things?",
+    "input_type": "phq2_scale",
+    "required": false,
+    "maps_to": "screening.phq2",
+    "feeds_rules": ["DM-007","MEN-002"]
+  },
+  {
+    "id": "Q29",
+    "section": "Mental Health",
+    "text": "Over the last 2 weeks, how often have you felt nervous, anxious, or on edge?",
+    "input_type": "gad2_scale",
+    "required": false,
+    "maps_to": "screening.gad2",
+    "feeds_rules": ["DM-007","MEN-002"]
+  },
+  {
+    "id": "Q29B",
+    "section": "Mental Health",
+    "text": "How stressed do you feel most days?",
+    "input_type": "scale_0_10",
+    "required": false,
+    "maps_to": "screening.stress_0_10"
+  },
+
+  /* ========== SECTION: Environment, Barriers & Readiness ========== */
+  {
+    "id": "Q30",
+    "section": "Environment",
+    "text": "What best describes your work pattern?",
+    "input_type": "single_choice",
+    "required": false,
+    "options": ["standard","shift","rotating","gig","student","caregiving"],
+    "maps_to": "environment.work_pattern"
+  },
+  {
+    "id": "Q31",
+    "section": "Barriers",
+    "text": "What are your biggest barriers to improving your health? (pick up to 3)",
+    "input_type": "multi_choice",
+    "required": false,
+    "max_choices": 3,
+    "options": ["time","stress","pain","motivation","budget","food_access","equipment","knowledge","other"],
+    "maps_to": "readiness.barriers",
+    "feeds_rules": ["ENV-003","L2-002"]
+  },
+  {
+    "id": "Q32",
+    "section": "Barriers",
+    "text": "How confident are you in your ability to make changes right now?",
+    "input_type": "scale_0_10",
+    "required": false,
+    "maps_to": "readiness.confidence_0_10",
+    "feeds_rules": ["L2-002"]
+  },
+  {
+    "id": "Q33",
+    "section": "Environment",
+    "text": "How often do you travel for work or life?",
+    "input_type": "single_choice",
+    "required": false,
+    "options": ["never","monthly","weekly"],
+    "maps_to": "environment.travel_frequency"
+  },
+
+  /* ========== SECTION: Supplements (optional) ========== */
+  {
+    "id": "Q34",
+    "section": "Supplements",
+    "text": "Do you currently take any supplements regularly?",
+    "input_type": "yes_no",
+    "required": false,
+    "maps_to": "diet.supplements_flag"
+  },
+  {
+    "id": "Q34A",
+    "section": "Supplements",
+    "text": "List any supplements you take (optional).",
+    "input_type": "text",
+    "required": false,
+    "show_if": "Q34 == true",
+    "maps_to": "diet.supplements_list"
+  },
+
+  /* ========== SECTION: Safety & Medical Clearance ========== */
+  {
+    "id": "Q35",
+    "section": "Safety",
+    "text": "Has a clinician ever told you to avoid exercise or only exercise under supervision?",
+    "input_type": "yes_no",
+    "required": false,
+    "maps_to": "screening.par_q_plus_flag"
+  },
+  {
+    "id": "Q36",
+    "section": "Safety",
+    "text": "Do you get chest pain, severe shortness of breath, or dizziness with exercise?",
+    "input_type": "yes_no",
+    "required": false,
+    "maps_to": "screening.exercise_risk_flag"
+  }
 ]
