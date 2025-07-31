@@ -1,0 +1,21 @@
+[
+  {
+    "priority": 10,
+    "when": { "exercise": "none" },
+    "then": {
+      "add_top_actions": [
+        { "title": "Start Small Workouts", "description": "Begin with 10 minute walks each day." }
+      ],
+      "set": { "level": "L1" }
+    }
+  },
+  {
+    "priority": 5,
+    "when": { "sleep": "poor" },
+    "then": {
+      "add_top_actions": [
+        { "title": "Improve Sleep Hygiene", "description": "Establish a regular bedtime routine." }
+      ]
+    }
+  }
+]
