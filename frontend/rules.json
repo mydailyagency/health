@@ -1,0 +1,30 @@
+[
+  {
+    "id": "smoke",
+    "text": "Do you smoke?",
+    "type": "yesno"
+  },
+  {
+    "id": "cigs_per_day",
+    "text": "How many cigarettes per day?",
+    "type": "number",
+    "show_if": { "id": "smoke", "value": "yes" }
+  },
+  {
+    "id": "diet",
+    "text": "How would you rate your diet?",
+    "type": "choice",
+    "options": ["Excellent", "Good", "Poor"]
+  },
+  {
+    "id": "exercise",
+    "text": "Do you exercise regularly?",
+    "type": "yesno"
+  },
+  {
+    "id": "exercise_minutes",
+    "text": "How many minutes per week do you exercise?",
+    "type": "number",
+    "show_if": { "id": "exercise", "value": "yes" }
+  }
+]
