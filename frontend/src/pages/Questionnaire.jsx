@@ -2,29 +2,41 @@ import { useState, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import questions from '../../rules.json';
 
-function evaluateShowIf(exp, answers) {
-  if (!exp) return true;
-  // Q23 includes 'htn'
-  const includeMatch = exp.match(/(Q\d+) includes '([^']+)'/);
-  if (includeMatch) {
-    const val = answers[includeMatch[1]];
-    return Array.isArray(val) ? val.includes(includeMatch[2]) : false;
+function evaluateShowIf(exp, answersByQid) {
+  // If there's no condition, show the question
+  if (!exp || typeof exp !== "string") return true;
+
+  try {
+    // Handle "includes"
+    let m = exp.match(/^(\w+)\s+includes\s+'([^']+)'$/);
+    if (m) {
+      const [, qid, val] = m;
+      return Array.isArray(answersByQid[qid]) && answersByQid[qid].includes(val);
+    }
+
+    // Handle "=="
+    m = exp.match(/^(\w+)\s*==\s*(true|false|'[^']*')$/);
+    if (m) {
+      const [, qid, rhs] = m;
+      const answer = answersByQid[qid];
+      if (rhs === "true") return Boolean(answer) === true;
+      if (rhs === "false") return Boolean(answer) === false;
+      return String(answer) === rhs.replace(/'/g, "");
+    }
+
+    // Handle "in"
+    m = exp.match(/^(\w+)\s+in\s+\[([^\]]+)\]$/);
+    if (m) {
+      const [, qid, listRaw] = m;
+      const list = listRaw.split(",").map(s => s.trim().replace(/'/g, ""));
+      return list.includes(String(answersByQid[qid]));
+    }
+
+    return true; // default
+  } catch (err) {
+    console.warn("Failed to evaluate show_if:", exp, err);
+    return true; // fail-safe: show 
   }
-  const inMatch = exp.match(/(Q\d+) in \[([^\]]+)\]/);
-  if (inMatch) {
-    const val = answers[inMatch[1]];
-    const opts = inMatch[2].split(',').map(s => s.trim().replace(/^'|'$/g,''));
-    return opts.includes(val);
-  }
-  const eqMatch = exp.match(/(Q\d+) == (.+)/);
-  if (eqMatch) {
-    const val = answers[eqMatch[1]];
-    const rhs = eqMatch[2].trim();
-    if (rhs === 'true') return val === true;
-    if (rhs === 'false') return val === false;
-    return String(val) === rhs.replace(/^'|'$/g,'');
-  }
-  return true;
 }
 
 function setNested(obj, path, value) {
@@ -65,8 +77,18 @@ export default function Questionnaire() {
     return groups;
   }, []);
 
-  const visibleQuestions = section =>
-    section.questions.filter(q => evaluateShowIf(q.show_if, answers));
+ const visibleQuestions = (section) => {
+  // Build a map of answers keyed by question ID
+  const answersByQid = {};
+  Object.keys(answers).forEach((qid) => {
+    answersByQid[qid] = answers[qid];
+  });
+
+  // Filter questions based on show_if condition
+  return section.questions.filter((q) =>
+    evaluateShowIf(q.show_if, answersByQid)
+  );
+};
 
   const isSectionValid = section => {
     const qs = visibleQuestions(section);
