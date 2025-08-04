@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Health Questionnaire | Personalized Wellness Assessment</title>
+  <title>MyDailyAgency Health - Your Journey to Optimal Health</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
@@ -23,8 +23,9 @@
       --danger: #dc3545;             /* Danger color */
       --border-radius: 8px;         /* Consistent border radius */
       --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Softer shadow */
+      --gold: #d4af37;               /* Gold accent for luxury feel */
     }
-
+    
     /* General Body & Typography */
     body {
       font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -34,243 +35,394 @@
       padding: 0;
       line-height: 1.6;
     }
-
+    
     h1, h2, h3, h4, h5, h6 {
       color: var(--dark);
       font-weight: 700;
     }
-
+    
+    .display-font {
+      font-family: 'Playfair Display', serif;
+    }
+    
     /* Landing Page Styles */
+    .landing-page {
+      display: block;
+    }
+    
+    .questionnaire-page {
+      display: none;
+    }
+    
+    /* Navigation */
+    .navbar {
+      background: linear-gradient(135deg, var(--primary) 0%, #2c5282 100%);
+      padding: 1rem 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .logo i {
+      color: var(--gold);
+    }
+    
+    /* Hero Section */
     .hero {
-      background: linear-gradient(rgba(26, 58, 95, 0.85), rgba(26, 58, 95, 0.85)), 
+      background: linear-gradient(rgba(26, 58, 95, 0.8), rgba(26, 58, 95, 0.9)), 
                   url('https://images.unsplash.com/photo-1494597564530-871f2b93ac55?q=80&w=813&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
       background-size: cover;
       background-position: center;
       color: white;
-      padding: 100px 20px;
+      padding: 8rem 2rem 4rem;
       text-align: center;
-      position: relative;
+      margin-top: 60px;
     }
-
+    
     .hero-content {
       max-width: 800px;
       margin: 0 auto;
     }
-
+    
     .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
       color: white;
-      font-size: 3rem;
-      margin-bottom: 20px;
-      font-weight: 700;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
-
-    .hero p {
-      font-size: 1.25rem;
-      margin-bottom: 30px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
+    
+    .hero .subtitle {
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+      color: #e9ecef;
     }
-
-    .btn {
+    
+    .cta-button {
       display: inline-block;
-      padding: 12px 30px;
-      background-color: var(--accent);
-      color: white;
-      border-radius: var(--border-radius);
+      background: linear-gradient(135deg, var(--gold) 0%, #f4d03f 100%);
+      color: var(--primary);
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 1.1rem;
       transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
       border: none;
       cursor: pointer;
     }
-
-    .btn:hover {
-      background-color: #65a538;
+    
+    .cta-button:hover {
       transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+      color: var(--primary);
     }
-
-    .features {
-      padding: 80px 20px;
+    
+    /* Benefits Section */
+    .benefits {
+      padding: 4rem 2rem;
+      background: white;
+    }
+    
+    .benefits-container {
       max-width: 1200px;
       margin: 0 auto;
     }
-
-    .features h2 {
+    
+    .benefits h2 {
       text-align: center;
+      font-family: 'Playfair Display', serif;
       font-size: 2.5rem;
-      margin-bottom: 50px;
       color: var(--primary);
+      margin-bottom: 3rem;
     }
-
-    .feature-grid {
+    
+    .benefits-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
+      gap: 2rem;
+      margin-bottom: 3rem;
     }
-
-    .feature-card {
-      background: white;
+    
+    .benefit-card {
+      background: var(--light);
+      padding: 2rem;
       border-radius: var(--border-radius);
-      padding: 30px;
-      box-shadow: var(--box-shadow);
       text-align: center;
       transition: transform 0.3s ease;
+      border: 1px solid #e9ecef;
     }
-
-    .feature-card:hover {
-      transform: translateY(-10px);
+    
+    .benefit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--box-shadow);
     }
-
-    .feature-icon {
+    
+    .benefit-card i {
       font-size: 3rem;
-      color: var(--secondary);
-      margin-bottom: 20px;
+      color: var(--accent);
+      margin-bottom: 1rem;
     }
-
-    .feature-card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 15px;
+    
+    .benefit-card h3 {
       color: var(--primary);
+      margin-bottom: 1rem;
     }
-
-    .testimonial {
-      background-color: #f8f9fa;
-      padding: 80px 20px;
+    
+    /* Trust Section */
+    .trust {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      padding: 4rem 2rem;
     }
-
-    .testimonial h2 {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 50px;
-      color: var(--primary);
-    }
-
-    .testimonial-grid {
+    
+    .trust-container {
+      max-width: 1200px;
+      margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    
+    .trust-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 2rem;
+    }
+    
+    .trust-image {
+      text-align: center;
+    }
+    
+    .trust-image img {
+      max-width: 100%;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
+    
+    /* Features Section */
+    .features {
+      padding: 4rem 2rem;
+      background: white;
+    }
+    
+    .features-container {
       max-width: 1200px;
       margin: 0 auto;
     }
-
+    
+    .features h2 {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 3rem;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+    
+    .feature-item {
+      text-align: center;
+      padding: 1.5rem;
+    }
+    
+    .feature-item i {
+      font-size: 2.5rem;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+    }
+    
+    /* Testimonials Section */
+    .testimonials {
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+    
+    .testimonials-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .testimonials h2 {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 3rem;
+    }
+    
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
     .testimonial-card {
       background: white;
+      padding: 2rem;
       border-radius: var(--border-radius);
-      padding: 30px;
       box-shadow: var(--box-shadow);
       position: relative;
     }
-
+    
     .testimonial-card::before {
-      content: '"';
+      content: '\f10d';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
       position: absolute;
-      top: 10px;
-      left: 20px;
-      font-size: 60px;
-      color: rgba(93, 138, 168, 0.2);
-      font-family: Georgia, serif;
-    }
-
-    .testimonial-text {
-      font-style: italic;
-      margin-bottom: 20px;
-    }
-
-    .testimonial-author {
-      font-weight: 600;
+      top: 1rem;
+      left: 1rem;
+      font-size: 2rem;
       color: var(--secondary);
+      opacity: 0.2;
     }
-
-    .cta-section {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      padding: 80px 20px;
-      text-align: center;
-      color: white;
+    
+    .testimonial-content {
+      margin-bottom: 1.5rem;
+      font-style: italic;
+      color: var(--medium);
     }
-
-    .cta-section h2 {
-      color: white;
-      font-size: 2.5rem;
-      margin-bottom: 20px;
+    
+    .testimonial-author {
+      display: flex;
+      align-items: center;
     }
-
-    .cta-section p {
-      font-size: 1.2rem;
-      margin-bottom: 30px;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
+    
+    .testimonial-author i {
+      font-size: 2rem;
+      color: var(--gold);
+      margin-right: 1rem;
     }
-
-    .btn-cta {
-      background-color: white;
+    
+    .testimonial-info h4 {
+      margin: 0;
       color: var(--primary);
-      padding: 15px 40px;
-      font-size: 1.2rem;
     }
-
-    .btn-cta:hover {
-      background-color: #f8f9fa;
+    
+    .testimonial-info p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--medium);
     }
-
-    .disclaimer {
-      background-color: #f8f9fa;
-      padding: 40px 20px;
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto;
-      border-top: 1px solid #e9ecef;
+    
+    /* Trust Indicators */
+    .trust-indicators {
+      padding: 3rem 2rem;
+      background: white;
     }
-
-    .disclaimer h3 {
-      color: var(--primary);
-      margin-bottom: 15px;
-    }
-
-    .disclaimer p {
-      margin-bottom: 15px;
-    }
-
-    .image-gallery {
-      padding: 80px 20px;
+    
+    .trust-indicators-container {
       max-width: 1200px;
       margin: 0 auto;
     }
-
-    .image-gallery h2 {
+    
+    .trust-indicators h2 {
       text-align: center;
+      font-family: 'Playfair Display', serif;
       font-size: 2.5rem;
-      margin-bottom: 50px;
       color: var(--primary);
+      margin-bottom: 3rem;
     }
-
-    .gallery-grid {
+    
+    .indicators-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      text-align: center;
     }
-
-    .gallery-item {
+    
+    .indicator-item {
+      padding: 1.5rem;
+    }
+    
+    .indicator-item i {
+      font-size: 3rem;
+      color: var(--success);
+      margin-bottom: 1rem;
+    }
+    
+    .indicator-item h3 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    
+    /* Disclaimer Section */
+    .disclaimer {
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      padding: 2rem;
+      margin: 2rem auto;
+      max-width: 1200px;
       border-radius: var(--border-radius);
-      overflow: hidden;
-      box-shadow: var(--box-shadow);
-      height: 250px;
     }
-
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
+    
+    .disclaimer h3 {
+      color: #856404;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
-
-    .gallery-item:hover img {
-      transform: scale(1.05);
+    
+    .disclaimer p {
+      color: #856404;
+      margin-bottom: 0.5rem;
     }
-
-    /* Main Container */
+    
+    .disclaimer ul {
+      color: #856404;
+      padding-left: 1.5rem;
+    }
+    
+    /* Final CTA */
+    .final-cta {
+      background: linear-gradient(135deg, var(--primary) 0%, #2c5282 100%);
+      color: white;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    
+    .final-cta h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: white;
+      margin-bottom: 1rem;
+    }
+    
+    .final-cta p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: #e9ecef;
+    }
+    
+    /* Questionnaire Styles (unchanged from original) */
     .container {
       max-width: 800px;
       margin: auto;
@@ -278,23 +430,22 @@
       padding: 40px;
       border-radius: var(--border-radius);
       box-shadow: var(--box-shadow);
-      overflow: hidden; /* Ensures content respects border-radius */
-      margin-top: 40px;
-      margin-bottom: 40px;
+      overflow: hidden;
+      margin-top: 80px;
     }
-
+    
     h1 {
       text-align: center;
       color: var(--primary);
       margin-bottom: 30px;
       font-size: 2.5rem;
     }
-
+    
     /* Progress Indicator */
     .progress-container {
       margin-bottom: 2rem;
     }
-
+    
     .progress-bar {
       height: 6px;
       background-color: #e9ecef;
@@ -302,19 +453,19 @@
       margin-bottom: 1rem;
       overflow: hidden;
     }
-
+    
     .progress {
       height: 100%;
       background-color: var(--secondary);
       width: 0%;
       transition: width 0.3s ease;
     }
-
+    
     .progress-steps {
       display: flex;
       justify-content: space-between;
     }
-
+    
     .step {
       flex: 1;
       text-align: center;
@@ -324,16 +475,16 @@
       padding-bottom: 0.5rem;
       cursor: pointer;
     }
-
+    
     .step.active {
       color: var(--secondary);
       font-weight: 600;
     }
-
+    
     .step.completed {
       color: var(--accent);
     }
-
+    
     .step::after {
       content: '';
       position: absolute;
@@ -346,15 +497,15 @@
       background-color: #adb5bd;
       transition: background-color 0.3s ease;
     }
-
+    
     .step.active::after {
       background-color: var(--secondary);
     }
-
+    
     .step.completed::after {
       background-color: var(--accent);
     }
-
+    
     /* Form Structure */
     fieldset {
       border: none;
@@ -374,7 +525,7 @@
       margin-bottom: 0;
       padding-bottom: 0;
     }
-
+    
     legend {
       font-weight: 700;
       font-size: 1.25em;
@@ -384,24 +535,24 @@
       display: flex;
       align-items: center;
     }
-
+    
     legend i {
       margin-right: 10px;
     }
-
+    
     /* Form Elements */
     .form-group {
       margin-bottom: 1.5rem;
       position: relative;
     }
-
+    
     label {
       display: block;
       margin-bottom: 8px;
       font-weight: 600;
       color: var(--dark);
     }
-
+    
     input[type="text"],
     input[type="number"],
     select,
@@ -417,18 +568,18 @@
       transition: border-color 0.3s, box-shadow 0.3s;
       background-color: #fff;
     }
-
+    
     input:focus, select:focus, textarea:focus {
       border-color: var(--secondary);
       box-shadow: 0 0 0 3px rgba(93, 138, 168, 0.2);
       outline: none;
     }
-
+    
     textarea {
       resize: vertical;
       min-height: 100px;
     }
-
+    
     /* Custom select styling */
     select {
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E");
@@ -438,7 +589,7 @@
       padding-right: 2.5rem;
       appearance: none;
     }
-
+    
     /* Radio and Checkbox styling */
     .radio-options, .checkbox-options {
       display: flex;
@@ -446,19 +597,19 @@
       gap: 10px;
       margin-top: 8px;
     }
-
+    
     .radio-label, .checkbox-label {
       display: flex;
       align-items: center;
       font-weight: normal;
       cursor: pointer;
     }
-
+    
     .radio-label input, .checkbox-label input {
       margin-right: 8px;
       width: auto;
     }
-
+    
     /* Button Styling */
     .btn {
       padding: 0.75rem 1.5rem;
@@ -469,39 +620,39 @@
       border: none;
       font-size: 1rem;
     }
-
+    
     .btn-primary {
       background-color: var(--primary);
       color: white;
     }
-
+    
     .btn-primary:hover {
       background-color: #152d47;
     }
-
+    
     .btn-secondary {
       background-color: #e9ecef;
       color: var(--medium);
     }
-
+    
     .btn-secondary:hover:not(:disabled) {
       background-color: #dee2e6;
     }
-
+    
     .btn-success {
       background-color: var(--success);
       color: white;
     }
-
+    
     .btn-success:hover {
       background-color: #218838;
     }
-
+    
     button:disabled {
       opacity: 0.5;
       cursor: not-allowed;
     }
-
+    
     /* Section Navigation */
     .section-navigation {
       display: flex;
@@ -510,7 +661,7 @@
       padding-top: 1rem;
       border-top: 1px solid #e9ecef;
     }
-
+    
     /* Notification */
     .notification {
       position: fixed;
@@ -524,7 +675,7 @@
       z-index: 1000;
       animation: slideIn 0.3s ease;
     }
-
+    
     @keyframes slideIn {
       from {
         transform: translateX(100%);
@@ -535,18 +686,18 @@
         opacity: 1;
       }
     }
-
+    
     /* Form validation */
     .error-message {
       color: var(--danger);
       font-size: 0.875rem;
       margin-top: 0.25rem;
     }
-
+    
     input.error, select.error, textarea.error {
       border-color: var(--danger);
     }
-
+    
     /* Success message */
     .success-message {
       background-color: #f8f9fa;
@@ -555,35 +706,61 @@
       border-radius: var(--border-radius);
       margin-top: 2rem;
     }
-
+    
     .success-message h3 {
       color: var(--success);
       margin-top: 0;
     }
-
+    
     /* Report section */
     #report {
       display: none;
       margin-top: 2rem;
     }
-
+    
+    /* Back to Home Button */
+    .back-home {
+      position: fixed;
+      top: 80px;
+      left: 20px;
+      background: var(--secondary);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: var(--border-radius);
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: none;
+      z-index: 999;
+    }
+    
+    .questionnaire-page .back-home {
+      display: block;
+    }
+    
+    .back-home:hover {
+      background: var(--primary);
+      color: white;
+    }
+    
     /* Mobile responsiveness */
     @media (max-width: 768px) {
       .hero h1 {
-        font-size: 2rem;
+        font-size: 2.5rem;
       }
       
-      .hero p {
-        font-size: 1rem;
+      .hero .subtitle {
+        font-size: 1.1rem;
       }
       
-      .features h2, .testimonial h2, .cta-section h2, .image-gallery h2 {
-        font-size: 1.75rem;
+      .trust-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
       }
       
       .container {
         padding: 20px;
-        margin: 20px 10px;
+        margin: 10px;
+        margin-top: 80px;
       }
       
       h1 {
@@ -613,7 +790,6 @@
         font-size: 0.9rem;
       }
       
-      /* Stack navigation buttons on mobile */
       .section-navigation {
         flex-direction: column;
         gap: 10px;
@@ -626,588 +802,1024 @@
   </style>
 </head>
 <body>
-
-  <!-- Landing Page Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Personalized Health Assessment</h1>
-      <p>Discover your path to optimal wellness with our comprehensive health questionnaire. Get insights tailored specifically to your lifestyle, goals, and health needs.</p>
-      <a href="#questionnaire" class="btn">Start Your Health Journey</a>
-    </div>
-  </section>
-
-  <!-- Features Section -->
-  <section class="features">
-    <h2>Why Choose Our Health Assessment?</h2>
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-user-md"></i>
-        </div>
-        <h3>Personalized Insights</h3>
-        <p>Get customized recommendations based on your unique health profile, lifestyle, and wellness goals.</p>
+  <!-- Landing Page -->
+  <div class="landing-page" id="landingPage">
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="#" class="logo">
+          <i class="fas fa-heartbeat"></i>
+          MyDailyAgency Health
+        </a>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-chart-line"></i>
-        </div>
-        <h3>Comprehensive Analysis</h3>
-        <p>Our thorough questionnaire covers all aspects of your health, from nutrition and exercise to sleep and mental well-being.</p>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1 class="display-font">Reclaim Your Health, One Step at a Time</h1>
+        <p class="subtitle">Empower yourself with personalized insights that transform small daily choices into lasting wellness</p>
+        <button class="cta-button" onclick="startQuestionnaire()">
+          <i class="fas fa-arrow-right"></i> Begin Your Health Journey
+        </button>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-bullseye"></i>
-        </div>
-        <h3>Actionable Goals</h3>
-        <p>Receive practical, achievable recommendations tailored to your specific health objectives and preferences.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Image Gallery Section -->
-  <section class="image-gallery">
-    <h2>A Holistic Approach to Wellness</h2>
-    <div class="gallery-grid">
-      <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?q=80&w=871&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Healthy nutrition">
-      </div>
-      <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1600618528240-fb9fc964b853?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Physical activity">
-      </div>
-      <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1535914254981-b5012eebbd15?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mental wellness">
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonial Section -->
-  <section class="testimonial">
-    <h2>What Our Clients Say</h2>
-    <div class="testimonial-grid">
-      <div class="testimonial-card">
-        <p class="testimonial-text">The health assessment helped me identify areas I never considered. The personalized recommendations have transformed my approach to wellness.</p>
-        <p class="testimonial-author">- Sarah T.</p>
-      </div>
-      <div class="testimonial-card">
-        <p class="testimonial-text">Finally, a health questionnaire that actually understands my lifestyle. The insights were spot-on and incredibly actionable.</p>
-        <p class="testimonial-author">- Michael R.</p>
-      </div>
-      <div class="testimonial-card">
-        <p class="testimonial-text">I've tried many wellness programs, but this comprehensive assessment gave me the clearest path forward for my health goals.</p>
-        <p class="testimonial-author">- Jennifer L.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="cta-section">
-    <h2>Ready to Transform Your Health?</h2>
-    <p>Take the first step towards a healthier, more balanced life. Our comprehensive assessment will provide you with personalized insights and actionable recommendations.</p>
-    <a href="#questionnaire" class="btn btn-cta">Begin Your Assessment</a>
-  </section>
-
-  <!-- Disclaimer Section -->
-  <section class="disclaimer">
-    <h3>Important Disclaimer</h3>
-    <p>This health questionnaire is designed for informational and educational purposes only. It is not intended to be a substitute for professional medical advice, diagnosis, or treatment.</p>
-    <p>The information provided through this questionnaire is not medical advice and should not be used as a replacement for consultation with qualified healthcare professionals. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>
-    <p>Do not disregard professional medical advice or delay in seeking it because of something you have read or received through this questionnaire. If you think you may have a medical emergency, call your doctor or emergency services immediately.</p>
-  </section>
-
-  <!-- Questionnaire Form -->
-  <div id="questionnaire" class="container">
-    <h1>Health Questionnaire</h1>
-    
-    <div class="progress-container">
-      <div class="progress-bar">
-        <div class="progress" id="questionnaireProgress"></div>
-      </div>
-      <div class="progress-steps">
-        <div class="step active" data-section="personal" data-step="1">Personal</div>
-        <div class="step" data-section="health" data-step="2">Health</div>
-        <div class="step" data-section="nutrition" data-step="3">Nutrition</div>
-        <div class="step" data-section="activity" data-step="4">Activity</div>
-        <div class="step" data-section="sleep" data-step="5">Sleep</div>
-        <div class="step" data-section="mental" data-step="6">Mental</div>
-        <div class="step" data-section="lifestyle" data-step="7">Lifestyle</div>
-        <div class="step" data-section="social" data-step="8">Social</div>
-        <div class="step" data-section="goals" data-step="9">Goals</div>
-      </div>
-    </div>
-    
-    <form id="questionnaireForm">
-
-      <fieldset id="personal" class="active">
-        <legend><i class="fas fa-user"></i> Personal & Demographic Information</legend>
-        
-        <div class="form-group">
-          <label for="age">• Age: What is your age (in years)?</label>
-          <input type="number" id="age" name="Age" required>
-        </div>
-
-        <div class="form-group">
-          <label for="biological-sex">• Biological Sex: What is your biological sex (male or female)?</label>
-          <select id="biological-sex" name="Biological Sex" required>
-            <option value="">Please select</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-          </select>
-        </div>
-
-        <div class="form-group" id="gender-group">
-          <label for="gender">• Gender (optional): (If different from biological sex or if you wish to specify) What gender do you identify as?</label>
-          <input type="text" id="gender" name="Gender">
-        </div>
-
-        <div class="form-group" id="menstrual-group">
-          <label for="menstrual-status">• Menstrual Status (for those born female): Are you currently menstruating regularly, perimenopausal (transitioning to menopause), or postmenopausal (periods have stopped for 1+ year)?</label>
-          <select id="menstrual-status" name="Menstrual Status">
-            <option value="">Please select</option>
-            <option>Menstruating regularly</option>
-            <option>Perimenopausal</option>
-            <option>Postmenopausal</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="pregnancy">• Pregnancy: Are you currently pregnant, planning to become pregnant in the near future, or recently (within last year) postpartum? (Yes/No, if yes please specify stage)</label>
-          <input type="text" id="pregnancy" name="Pregnancy">
-        </div>
-
-        <div class="form-group">
-          <label for="height">• Height: What is your height? (Please specify feet/inches or centimeters.)</label>
-          <input type="text" id="height" name="Height">
-        </div>
-
-        <div class="form-group">
-          <label for="weight">• Weight: What is your current body weight? (Specify pounds or kilograms.)</label>
-          <input type="text" id="weight" name="Weight">
-        </div>
-
-        <div class="form-group">
-          <label for="weight-history">• Weight History: Has your weight changed significantly (gain or loss) in the last 6 months to a year? If yes, by how much and was it intentional?</label>
-          <textarea id="weight-history" name="Weight History"></textarea>
-        </div>
-      </fieldset>
-
-      <fieldset id="health">
-        <legend><i class="fas fa-heartbeat"></i> Health Status & Medical History</legend>
-
-        <div class="form-group">
-          <label for="general-health">• General Health Rating: How would you rate your overall health currently? (e.g., Excellent, Good, Fair, Poor)</label>
-          <select id="general-health" name="General Health Rating" required>
-            <option value="">Please select</option>
-            <option>Excellent</option>
-            <option>Good</option>
-            <option>Fair</option>
-            <option>Poor</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="medical-conditions">• Medical Conditions: Do you have any diagnosed health conditions or chronic illnesses? (Examples: high blood pressure, diabetes (pre/Type 2), high cholesterol, asthma, arthritis, anxiety or depression, etc. – please list all that apply.)</label>
-          <textarea id="medical-conditions" name="Medical Conditions"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="medications">• Medications: Are you currently taking any prescription medications or over-the-counter drugs on a regular basis? If so, please list them (or the condition they're for, if you prefer).</label>
-          <textarea id="medications" name="Medications"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="supplements">• Supplements: Do you take any vitamins, minerals, or dietary supplements regularly? If yes, which ones (e.g., multivitamin, vitamin D, protein powder, herbal supplements, etc.) and approximate dosages if known.</label>
-          <textarea id="supplements" name="Supplements"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="allergies">• Allergies: Do you have any allergies or intolerances (food allergies, medication allergies, etc.)? Please list.</label>
-          <textarea id="allergies" name="Allergies"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="recent-checkups">• Recent Health Check-ups: When was your last general physical exam or check-up with a doctor? (Approximate date or time frame.) Did it include blood work? If so, were any abnormalities noted (e.g., high cholesterol, high blood sugar)?</label>
-          <textarea id="recent-checkups" name="Recent Health Check-ups"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="injuries">• Injuries or Limitations: Do you have any injuries, physical disabilities, or pain issues that affect your daily life or ability to exercise? (For example: chronic back pain, knee injury, past surgeries, etc. – describe severity and any guidance from doctors.)</label>
-          <textarea id="injuries" name="Injuries or Limitations"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="sleep-disorders">• Sleep Disorders: Have you ever been diagnosed with a sleep-related condition (insomnia, sleep apnea, etc.) or suspect you might have one? If yes, please elaborate.</label>
-          <textarea id="sleep-disorders" name="Sleep Disorders"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="family-history">• Family History: Does your family have a history of any major health issues? (Examples: heart disease, stroke, diabetes, cancer, Alzheimer's, etc., in close relatives like parents or siblings.) List any that apply and the relative's relation to you.</label>
-          <textarea id="family-history" name="Family History"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="vaccinations">• Vaccinations: Are you up-to-date on common vaccinations (such as tetanus, flu shot annually, COVID-19, etc.)? List any adult vaccines you have not received or are unsure about.</label>
-          <textarea id="vaccinations" name="Vaccinations"></textarea>
-        </div>
-      </fieldset>
-
-      <fieldset id="nutrition">
-        <legend><i class="fas fa-apple-alt"></i> Nutrition & Dietary Habits</legend>
-
-        <div class="form-group">
-          <label for="diet-description">• Diet Description: How would you describe your typical diet or way of eating in a few sentences? (For example: "I eat a standard American diet with some fast food," or "Mostly vegetarian with occasional fish," or "Home-cooked meals most days, love sweets," etc.)</label>
-          <textarea id="diet-description" name="Diet Description"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="meal-pattern">• Meal Pattern: How many meals and snacks do you usually eat per day? Do you tend to skip any meals regularly (e.g., breakfast)?</label>
-          <textarea id="meal-pattern" name="Meal Pattern"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="fruits-vegetables">• Fruits and Vegetables: On average, how many servings of vegetables and fruits do you consume in a day? (One serving ~ 1 cup leafy greens, 1 medium fruit, etc.)</label>
-          <input type="number" id="fruits-vegetables" name="Fruits and Vegetables" min="0">
-        </div>
-
-        <div class="form-group">
-          <label for="protein-sources">• Protein Sources: What are your primary protein sources? (e.g., chicken, beef, fish, eggs, beans, tofu, dairy, etc.) And do you eat protein with most meals?</label>
-          <textarea id="protein-sources" name="Protein Sources"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="carbohydrates">• Carbohydrates and Grains: Do you typically choose whole grains (whole wheat bread, brown rice, etc.) or refined grains (white bread, white rice)? How frequently do you eat high-carb foods like bread, pasta, rice, potatoes in a day?</label>
-          <textarea id="carbohydrates" name="Carbohydrates and Grains"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="fats">• Fats: What kind of fats do you include in your diet? (e.g., butter, olive oil, vegetable oils, nuts, avocado, etc.)</label>
-          <textarea id="fats" name="Fats"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="processed-foods">• Processed Foods & Sugar: How often do you consume processed or convenience foods (frozen meals, chips, sweets)? Do you drink sugary beverages (soda, sweet tea, energy drinks)? If yes, how many per week?</label>
-          <textarea id="processed-foods" name="Processed Foods & Sugar"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="dining-out">• Dining Out: How often do you eat out at restaurants or get take-out in a typical week? (Include fast food and coffee shop drinks/pastries in this count.)</label>
-          <input type="number" id="dining-out" name="Dining Out" min="0">
-        </div>
-
-        <div class="form-group">
-          <label for="hydration">• Hydration: How much water do you drink daily, on average? (Specify in glasses or liters.) Do you frequently drink other beverages (coffee/tea, juice, soda), and roughly how much of each?</label>
-          <textarea id="hydration" name="Hydration"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="dietary-restrictions">• Dietary Restrictions: Do you have any specific dietary restrictions or styles you follow? (e.g., vegetarian, vegan, keto, low-carb, low-salt, religious dietary laws, food allergies like gluten-free or lactose-free, etc.) Please list and describe any that apply.</label>
-          <textarea id="dietary-restrictions" name="Dietary Restrictions"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="cooking-habits">• Cooking vs Processed: How often do you cook fresh meals at home versus eating pre-packaged or restaurant food? (e.g., "I cook from scratch most nights" or "I mostly microwave ready meals.")</label>
-          <textarea id="cooking-habits" name="Cooking vs Processed"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="cravings">• Cravings or Problem Foods: Do you have any strong food cravings or particular "problem" foods you tend to overeat? (For instance, late-night snacks, sweets, fried foods, etc.)</label>
-          <textarea id="cravings" name="Cravings or Problem Foods"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="diet-products">• Supplements/Diet Products: (If not already noted) Are you using any special diet products (like meal replacement shakes, weight loss pills, etc.) or following any specific diet program currently? If yes, please detail.</label>
-          <textarea id="diet-products" name="Supplements/Diet Products"></textarea>
-        </div>
-      </fieldset>
-
-      <fieldset id="activity">
-        <legend><i class="fas fa-running"></i> Physical Activity & Exercise Habits</legend>
-
-        <div class="form-group">
-          <label for="activity-level">• Current Activity Level: How would you rate your overall activity level? (Sedentary – little to no exercise; Lightly active; Moderately active; Very active – intense exercise or physical job.)</label>
-          <select id="activity-level" name="Current Activity Level" required>
-            <option value="">Please select</option>
-            <option>Sedentary</option>
-            <option>Lightly active</option>
-            <option>Moderately active</option>
-            <option>Very active</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="exercise-frequency">• Exercise Frequency: How many days per week do you exercise intentionally (any planned workout or sport)? And for approximately how long each session?</label>
-          <textarea id="exercise-frequency" name="Exercise Frequency"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="exercise-types">• Exercise Types: What types of exercise or physical activities do you typically engage in? (e.g., walking, running, cycling, gym workouts, yoga, team sports, swimming, etc. List all that apply and frequency of each if possible.)</label>
-          <textarea id="exercise-types" name="Exercise Types"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="strength-training">• Strength Training: Do you do any strength or resistance training (using weights, resistance bands, or bodyweight exercises like push-ups/squats)? If yes, how often per week?</label>
-          <textarea id="strength-training" name="Strength Training"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="flexibility">• Flexibility/Mobility: Do you practice stretching, yoga, or other flexibility exercises regularly? If yes, how often and what type?</label>
-          <textarea id="flexibility" name="Flexibility/Mobility"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="daily-movement">• Daily Movement: Outside of structured exercise, how active is your typical day? (For example: mostly sitting at a desk, standing/walking a lot at work, doing physical labor, etc.) If you use a step counter, what's your average daily steps?</label>
-          <textarea id="daily-movement" name="Daily Movement"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="exercise-barriers">• Barriers to Exercise: If you are not exercising as much as you'd like, what are the main barriers? (e.g., lack of time, lack of energy or motivation, no access to facilities, physical pain/injury, not sure what to do, etc.)</label>
-          <textarea id="exercise-barriers" name="Barriers to Exercise"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="enjoyment">• Enjoyment: Are there physical activities you enjoy or have interest in starting? (This could be dancing, hiking, martial arts, etc. – knowing what you find fun can help tailor your plan.)</label>
-          <textarea id="enjoyment" name="Enjoyment"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="exercise-intensity">• Exercise Intensity: When you exercise, how hard do you typically push yourself? (Light – you can easily talk; Moderate – you're breathing faster but can speak; Vigorous – challenging to speak more than a few words; N/A if not exercising.)</label>
-          <select id="exercise-intensity" name="Exercise Intensity">
-            <option value="">Please select</option>
-            <option>Light</option>
-            <option>Moderate</option>
-            <option>Vigorous</option>
-            <option>N/A</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="past-exercise">• Past Exercise Habits: Have you ever followed a regular exercise routine in the past for a significant period? If so, what worked for you and why did it stop (if it did)?</label>
-          <textarea id="past-exercise" name="Past Exercise Habits"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="physical-limitations">• Physical Limitations: Do you have any injuries or conditions that limit certain types of exercise? (This may overlap with earlier questions – e.g., "bad knees make running hard," or "asthma limits intense cardio," etc.)</label>
-          <textarea id="physical-limitations" name="Physical Limitations"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="equipment-access">• Equipment/Access: What kind of access do you have for exercise? (Gym membership; Home equipment (treadmill, weights, etc.); Outdoor space like parks/trails; Community center or classes; Swimming pool; None of the above.)</label>
-          <textarea id="equipment-access" name="Equipment/Access"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="occupation-activity">• Occupation Activity: Does your job involve physical activity? (e.g., mostly sitting at a computer, standing all day, lifting heavy objects, etc.) And how many hours per day do you typically work?</label>
-          <textarea id="occupation-activity" name="Occupation Activity"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="commute">• Commute: How do you typically commute/travel daily (car, public transit, walking, biking) and how long does it take? (This can affect time and opportunity for activity.)</label>
-          <textarea id="commute" name="Commute"></textarea>
-        </div>
-      </fieldset>
-
-      <fieldset id="sleep">
-        <legend><i class="fas fa-bed"></i> Sleep Habits</legend>
-
-        <div class="form-group">
-          <label for="sleep-duration">• Sleep Duration: On average, how many hours of sleep do you get per night? (Weekdays vs weekends if different.)</label>
-          <input type="number" id="sleep-duration" name="Sleep Duration" step="0.1">
-        </div>
-
-        <div class="form-group">
-          <label for="sleep-quality">• Sleep Quality: How would you rate the quality of your sleep? (Great – wake up feeling rested; Fair – somewhat rested; Poor – often feel tired on waking or wake up frequently.)</label>
-          <select id="sleep-quality" name="Sleep Quality">
-            <option value="">Please select</option>
-            <option>Great</option>
-            <option>Fair</option>
-            <option>Poor</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="sleep-schedule">• Sleep Schedule: What is your usual bedtime and wake-up time? Is your sleep/wake schedule regular or does it vary widely day to day?</label>
-          <textarea id="sleep-schedule" name="Sleep Schedule"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="sleep-difficulties">• Difficulty Sleeping: Do you have any difficulties with sleep? (Trouble falling asleep; Waking up frequently at night; Waking up too early; Nightmares; None of the above.) Please elaborate on any checked.</label>
-          <textarea id="sleep-difficulties" name="Difficulty Sleeping"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="sleep-environment">• Sleep Environment: Do you use anything to help you sleep? (Examples: sleep medication, melatonin or herbal supplements, white noise machine, earplugs, etc.) Also, is your bedroom generally dark and quiet?</label>
-          <textarea id="sleep-environment" name="Sleep Environment"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="screen-time">• Screen Time: Do you use electronic devices (phone, computer, TV) close to bedtime? If yes, how soon before bed do you typically stop using them?</label>
-          <textarea id="screen-time" name="Screen Time at Bedtime"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="caffeine-sleep">• Caffeine & Sleep: How many caffeinated beverages (coffee, tea, cola, energy drinks) do you typically consume per day, and when is your last intake relative to bedtime?</label>
-          <textarea id="caffeine-sleep" name="Caffeine & Sleep"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="napping">• Napping: Do you take naps during the day? If so, how often and how long?</label>
-          <textarea id="napping" name="Napping"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="shift-work">• Shift Work/Irregular Hours: Do you do shift work or have an irregular schedule (including travel across time zones) that impacts your sleep patterns? If yes, please describe.</label>
-          <textarea id="shift-work" name="Shift Work/Irregular Hours"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="sleep-satisfaction">• Sleep Satisfaction: Do you usually wake up feeling refreshed? If not, how often do you feel fatigue or low energy during the day (rarely, some days, most days, every day)?</label>
-          <select id="sleep-satisfaction" name="Sleep Satisfaction">
-            <option value="">Please select</option>
-            <option>Rarely</option>
-            <option>Some days</option>
-            <option>Most days</option>
-            <option>Every day</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="sleep-aids">• Sleep Aids or Practices: Do you have any bedtime routines or practices to help you wind down? (e.g., reading, meditation, warm shower, etc.) Please describe any.</label>
-          <textarea id="sleep-aids" name="Sleep Aids or Practices"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="sleep-goals">• Sleep Goals: Do you feel you need more or better sleep? If so, how many hours would you consider ideal and what do you think is interfering with that currently?</label>
-          <textarea id="sleep-goals" name="Sleep Goals"></textarea>
-        </div>
-      </fieldset>
-
-      <fieldset id="mental">
-        <legend><i class="fas fa-brain"></i> Stress & Mental Well-Being</legend>
-
-        <div class="form-group">
-          <label for="stress-level">• Stress Level: How would you rate your typical stress level on a scale of 1-10 (10 being extremely stressed)?</label>
-          <input type="number" id="stress-level" name="Stress Level" min="1" max="10">
-        </div>
-
-        <div class="form-group">
-          <label for="stressors">• Main Stressors: What are the primary sources of stress in your life currently? (Examples: work/school, financial concerns, family or relationships, health issues, world events, etc.)</label>
-          <textarea id="stressors" name="Main Stressors"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="stress-symptoms">• Stress Symptoms: How does stress typically manifest for you? (e.g., trouble sleeping, irritability, anxiety, frequent headaches or muscle tension, emotional eating, difficulty concentrating, etc.)</label>
-          <textarea id="stress-symptoms" name="Stress Symptoms"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="coping-mechanisms">• Coping Mechanisms: How do you usually cope with or manage stress? (Examples: exercise, talking to friends/family, meditation or prayer, hobbies, listening to music, eating/drinking, smoking, or do you feel you don't cope well and just endure it?)</label>
-          <textarea id="coping-mechanisms" name="Coping Mechanisms"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="relaxation-practices">• Relaxation Practices: Do you engage in relaxation or mental health practices regularly? (Meditation, deep breathing exercises, yoga, journaling, therapy or counseling, religious/spiritual practices, other – please list.) How often?</label>
-          <textarea id="relaxation-practices" name="Relaxation Practices"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="mood">• Mood: How would you describe your overall mood and mental state lately? (Examples: "Generally positive," "Up and down, sometimes anxious," "Often feeling down or depressed," etc.)</label>
-          <textarea id="mood" name="Mood"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="mental-health">• Mental Health History: Have you ever been diagnosed with or treated for any mental health conditions such as depression, anxiety, PTSD, etc.? Or do you suspect you might have one currently? (If yes and you're comfortable, briefly describe and note if you are currently in treatment or taking medication for it.)</label>
-          <textarea id="mental-health" name="Mental Health History"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="life-satisfaction">• Life Satisfaction: On a scale of 1-10, how satisfied are you with your life in general right now? And are there specific areas you wish were different (career, relationships, personal growth, etc.)?</label>
-          <textarea id="life-satisfaction" name="Life Satisfaction"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="support-system">• Support System: Do you have people you can confide in or turn to for emotional support when stressed or upset? (Yes/No, and who?)</label>
-          <textarea id="support-system" name="Support System"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="work-life-balance">• Work-Life Balance: Do you feel you have a healthy balance between work (or school) and personal life? If not, what are the main issues (e.g., working too many hours, bringing work stress home, etc.)?</label>
-          <textarea id="work-life-balance" name="Work-Life Balance"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="hobbies">• Enjoyment & Hobbies: What activities or hobbies bring you joy or help you relax? How often do you engage in these? (If you don't have much time for hobbies, mention any you would enjoy if time permitted.)</label>
-          <textarea id="hobbies" name="Enjoyment & Hobbies"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="stress-management">• Stress Management Goal: Are you interested in learning or practicing new stress management techniques (like mindfulness, therapy, etc.) or do you have any in mind you'd like to try?</label>
-          <textarea id="stress-management" name="Stress Management Goal"></textarea>
-        </div>
-      </fieldset>
-
-      <fieldset id="lifestyle">
-        <legend><i class="fas fa-wine-bottle"></i> Lifestyle Habits (Smoking, Alcohol, Substance Use)</legend>
-
-        <div class="form-group">
-          <label for="smoking">• Smoking/Tobacco: Do you smoke cigarettes or use other tobacco products (including e-cigarettes/vaping, cigars, chewing tobacco)? If yes, how much or how often? If you quit, how long ago and how many years did you smoke?</label>
-          <textarea id="smoking" name="Smoking/Tobacco"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label>• Alcohol: Do you drink alcohol?</label>
-          <div class="radio-options">
-            <label class="radio-label">
-              <input type="radio" name="alcoholConsumption" value="none" checked> I don't drink alcohol
-            </label>
-            <label class="radio-label">
-              <input type="radio" name="alcoholConsumption" value="some"> I drink alcohol
-            </label>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits">
+      <div class="benefits-container">
+        <h2 class="display-font">Why Choose MyDailyAgency Health?</h2>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <i class="fas fa-user-md"></i>
+            <h3>Regain Your Agency</h3>
+            <p>Take control of your health journey with insights that put you in the driver's seat of your wellness decisions.</p>
           </div>
-          <textarea id="alcohol" name="Alcohol" style="display: none;"></textarea>
+          <div class="benefit-card">
+            <i class="fas fa-chart-line"></i>
+            <h3>Small Steps, Big Momentum</h3>
+            <p>Discover how tiny, consistent changes create powerful ripple effects across all aspects of your health.</p>
+          </div>
+          <div class="benefit-card">
+            <i class="fas fa-shield-alt"></i>
+            <h3>Secure & Confidential</h3>
+            <p>Your health information is protected with the highest standards of privacy and security.</p>
+          </div>
         </div>
+      </div>
+    </section>
 
-        <div class="form-group">
-          <label for="recreational-drugs">• Recreational Drugs: Do you use any recreational drugs or substances (e.g., marijuana, cocaine, etc.)? If yes, what substance and how frequently? (This is confidential and only to tailor advice appropriately.)</label>
-          <textarea id="recreational-drugs" name="Recreational Drugs"></textarea>
+    <!-- Trust Section -->
+    <section class="trust">
+      <div class="trust-container">
+        <div class="trust-content">
+          <h2 class="display-font">Professional Health Assessment</h2>
+          <p>Our evidence-based questionnaire is designed by health professionals to provide you with meaningful insights into your current health status. We cover nine essential areas of wellness:</p>
+          <ul style="text-align: left; color: var(--medium);">
+            <li>Personal & Demographic Information</li>
+            <li>Health Status & Medical History</li>
+            <li>Nutrition & Dietary Habits</li>
+            <li>Physical Activity & Exercise</li>
+            <li>Sleep Patterns & Quality</li>
+            <li>Stress & Mental Well-being</li>
+            <li>Lifestyle Habits</li>
+            <li>Social & Environmental Factors</li>
+            <li>Personal Goals & Priorities</li>
+          </ul>
         </div>
-
-        <div class="form-group">
-          <label for="caffeine">• Caffeine: How many caffeinated beverages do you have per day? (Include coffee, tea, cola, energy drinks – e.g., "2 cups of coffee and 1 soda") Do you feel you are sensitive to caffeine (e.g., get jittery or insomnia from it)?</label>
-          <textarea id="caffeine" name="Caffeine"></textarea>
+        <div class="trust-image">
+          <img src="https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?q=80&w=871&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Professional Health Assessment">
         </div>
+      </div>
+    </section>
 
-        <div class="form-group">
-          <label for="other-substances">• Other Substances: Do you use any other substances or supplements for performance or body composition (like steroids, weight-loss drugs, etc.)? Please list if any.</label>
-          <textarea id="other-substances" name="Other Substances"></textarea>
+    <!-- Features Section -->
+    <section class="features">
+      <div class="features-container">
+        <h2 class="display-font">What Makes Our Assessment Unique</h2>
+        <div class="features-grid">
+          <div class="feature-item">
+            <i class="fas fa-layer-group"></i>
+            <h4>Comprehensive Analysis</h4>
+            <p>Our assessment covers every dimension of your health, creating a complete picture of your wellness status</p>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-microchip"></i>
+            <h4>State-of-the-Art Technology</h4>
+            <p>Powered by the latest research in health science and behavioral psychology</p>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-user-cog"></i>
+            <h4>Custom Tailored Insights</h4>
+            <p>Receive recommendations uniquely designed for your specific health profile and goals</p>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-sync-alt"></i>
+            <h4>Dynamic & Adaptable</h4>
+            <p>Our system evolves with you, adjusting recommendations as your goals and circumstances change</p>
+          </div>
         </div>
+      </div>
+    </section>
 
-        <div class="form-group">
-          <label for="screen-time-daily">• Screen Time: Approximately how many hours per day do you spend in front of a screen (computer, phone, TV) for work and leisure? And do you feel this impacts your health (e.g., sleep, posture, stress)?</label>
-          <textarea id="screen-time-daily" name="Screen Time (Daily)"></textarea>
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+      <div class="testimonials-container">
+        <h2 class="display-font">Success Stories</h2>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <p class="testimonial-content">"MyDailyAgency Health helped me understand how small daily choices were impacting my overall wellbeing. The assessment was eye-opening, and the personalized recommendations have been life-changing."</p>
+            <div class="testimonial-author">
+              <i class="fas fa-user-circle"></i>
+              <div class="testimonial-info">
+                <h4>Sarah Johnson</h4>
+                <p>Regained energy and vitality</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-content">"I've tried many health programs, but this is the first that truly put me in control. The comprehensive assessment identified patterns I never noticed, and the small-step approach made sustainable changes possible."</p>
+            <div class="testimonial-author">
+              <i class="fas fa-user-circle"></i>
+              <div class="testimonial-info">
+                <h4>Michael Torres</h4>
+                <p>Achieved health goals in 6 months</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-content">"The empowerment I felt after completing the assessment was incredible. For the first time, I felt like I had agency over my health journey. The momentum from small changes has transformed my life."</p>
+            <div class="testimonial-author">
+              <i class="fas fa-user-circle"></i>
+              <div class="testimonial-info">
+                <h4>Amanda Chen</h4>
+                <p>Transformed relationship with health</p>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+    </section>
 
-        <div class="form-group">
-          <label for="sun-exposure">• Sun Exposure: How often are you exposed to sunlight/natural light? (e.g., "I'm outdoors briefly most days," or "rarely see the sun on workdays," etc.) Do you regularly use sunscreen when outdoors?</label>
-          <textarea id="sun-exposure" name="Sun Exposure"></textarea>
+    <!-- Trust Indicators Section -->
+    <section class="trust-indicators">
+      <div class="trust-indicators-container">
+        <h2 class="display-font">Trusted by Thousands</h2>
+        <div class="indicators-grid">
+          <div class="indicator-item">
+            <i class="fas fa-users"></i>
+            <h3>10,000+</h3>
+            <p>Health Journeys Started</p>
+          </div>
+          <div class="indicator-item">
+            <i class="fas fa-star"></i>
+            <h3>4.9/5</h3>
+            <p>User Satisfaction Rating</p>
+          </div>
+          <div class="indicator-item">
+            <i class="fas fa-award"></i>
+            <h3>Expert</h3>
+            <p>Designed by Health Professionals</p>
+          </div>
+          <div class="indicator-item">
+            <i class="fas fa-lock"></i>
+            <h3>100%</h3>
+            <p>Secure & Confidential</p>
+          </div>
         </div>
+      </div>
+    </section>
 
-        <div class="form-group">
-          <label for="occupational-hazards">• Occupational Hazards: Are you exposed to any health hazards in your environment (at work or home)? (Examples: loud noise, air pollution, chemicals, secondhand smoke, extreme stress environment, etc.) If yes, describe.</label>
-          <textarea id="occupational-hazards" name="Occupational Hazards"></textarea>
+    <!-- Disclaimer Section -->
+    <section class="disclaimer">
+      <div class="disclaimer-container">
+        <h3><i class="fas fa-exclamation-triangle"></i> Important Medical Disclaimer</h3>
+        <p><strong>Please read this carefully before proceeding:</strong></p>
+        <ul>
+          <li>This website and health assessment questionnaire do not provide medical advice, diagnosis, or treatment.</li>
+          <li>The information provided is for educational and informational purposes only.</li>
+          <li>Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</li>
+          <li>Never disregard professional medical advice or delay in seeking it because of something you have read on this website.</li>
+          <li>If you think you may have a medical emergency, call your doctor or emergency services immediately.</li>
+          <li>This assessment is not a substitute for professional medical advice, diagnosis, or treatment.</li>
+        </ul>
+        <p style="margin-top: 1rem;"><em>By proceeding with this assessment, you acknowledge that you have read, understood, and agree to this disclaimer.</em></p>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+      <h2 class="display-font">Ready to Reclaim Your Health Agency?</h2>
+      <p>Join thousands who have discovered the power of small steps creating big momentum in their wellness journey</p>
+      <button class="cta-button" onclick="startQuestionnaire()">
+        <i class="fas fa-play"></i> Start Your Empowered Health Journey Now
+      </button>
+    </section>
+  </div>
+
+  <!-- Questionnaire Page -->
+  <div class="questionnaire-page" id="questionnairePage">
+    <a href="#" class="back-home" onclick="goHome()">
+      <i class="fas fa-arrow-left"></i> Back to Home
+    </a>
+
+    <div class="container">
+      <h1>Health Questionnaire</h1>
+      
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div class="progress" id="questionnaireProgress"></div>
         </div>
-
-        <div class="form-group">
-          <label for="safety-habits">• Safety Habits: Do you consistently practice safety measures like wearing seatbelts, helmets (when biking), and safe driving (no texting etc.)? (This affects overall injury risk profile.)</label>
-          <textarea id="safety-habits" name="Safety Habits"></textarea>
+        <div class="progress-steps">
+          <div class="step active" data-section="personal" data-step="1">Personal</div>
+          <div class="step" data-section="health" data-step="2">Health</div>
+          <div class="step" data-section="nutrition" data-step="3">Nutrition</div>
+          <div class="step" data-section="activity" data-step="4">Activity</div>
+          <div class="step" data-section="sleep" data-step="5">Sleep</div>
+          <div class="step" data-section="mental" data-step="6">Mental</div>
+          <div class="step" data-section="lifestyle" data-step="7">Lifestyle</div>
+          <div class="step" data-section="social" data-step="8">Social</div>
+          <div class="step" data-section="goals" data-step="9">Goals</div>
         </div>
-
-        <div class="form-group">
-          <label for="substance-goals">• Substance Goals: Are you trying to quit or reduce any substance (smoking, alcohol, etc.)? If yes, what support or methods are you using or interested in using?</label>
-          <textarea id="substance-goals" name="Substance Goals"></textarea>
+      </div>
+      
+      <form id="questionnaireForm">
+        <fieldset id="personal" class="active">
+          <legend><i class="fas fa-user"></i> Personal & Demographic Information</legend>
+          
+          <div class="form-group">
+            <label for="age">• Age: What is your age (in years)?</label>
+            <input type="number" id="age" name="Age" required>
+          </div>
+          <div class="form-group">
+            <label for="biological-sex">• Biological Sex: What is your biological sex (male or female)?</label>
+            <select id="biological-sex" name="Biological Sex" required>
+              <option value="">Please select</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+          <div class="form-group" id="gender-group">
+            <label for="gender">• Gender (optional): (If different from biological sex or if you wish to specify) What gender do you identify as?</label>
+            <input type="text" id="gender" name="Gender">
+          </div>
+          <div class="form-group" id="menstrual-group">
+            <label for="menstrual-status">• Menstrual Status (for those born female): Are you currently menstruating regularly, perimenopausal (transitioning to menopause), or postmenopausal (periods have stopped for 1+ year)?</label>
+            <select id="menstrual-status" name="Menstrual Status">
+              <option value="">Please select</option>
+              <option>Menstruating regularly</option>
+              <option>Perimenopausal</option>
+              <option>Postmenopausal</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="pregnancy">• Pregnancy: Are you currently pregnant, planning to become pregnant in the near future, or recently (within last year) postpartum? (Yes/No, if yes please specify stage)</label>
+            <input type="text" id="pregnancy" name="Pregnancy">
+          </div>
+          <div class="form-group">
+            <label for="height">• Height: What is your height? (Please specify feet/inches or centimeters.)</label>
+            <input type="text" id="height" name="Height">
+          </div>
+          <div class="form-group">
+            <label for="weight">• Weight: What is your current body weight? (Specify pounds or kilograms.)</label>
+            <input type="text" id="weight" name="Weight">
+          </div>
+          <div class="form-group">
+            <label for="weight-history">• Weight History: Has your weight changed significantly (gain or loss) in the last 6 months to a year? If yes, by how much and was it intentional?</label>
+            <textarea id="weight-history" name="Weight History"></textarea>
+          </div>
+        </fieldset>
+        
+        <fieldset id="health">
+          <legend><i class="fas fa-heartbeat"></i> Health Status & Medical History</legend>
+          <div class="form-group">
+            <label for="general-health">• General Health Rating: How would you rate your overall health currently? (e.g., Excellent, Good, Fair, Poor)</label>
+            <select id="general-health" name="General Health Rating" required>
+              <option value="">Please select</option>
+              <option>Excellent</option>
+              <option>Good</option>
+              <option>Fair</option>
+              <option>Poor</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="medical-conditions">• Medical Conditions: Do you have any diagnosed health conditions or chronic illnesses? (Examples: high blood pressure, diabetes (pre/Type 2), high cholesterol, asthma, arthritis, anxiety or depression, etc. – please list all that apply.)</label>
+            <textarea id="medical-conditions" name="Medical Conditions"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="medications">• Medications: Are you currently taking any prescription medications or over-the-counter drugs on a regular basis? If so, please list them (or the condition they're for, if you prefer).</label>
+            <textarea id="medications" name="Medications"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="supplements">• Supplements: Do you take any vitamins, minerals, or dietary supplements regularly? If yes, which ones (e.g., multivitamin, vitamin D, protein powder, herbal supplements, etc.) and approximate dosages if known.</label>
+            <textarea id="supplements" name="Supplements"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="allergies">• Allergies: Do you have any allergies or intolerances (food allergies, medication allergies, etc.)? Please list.</label>
+            <textarea id="allergies" name="Allergies"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="recent-checkups">• Recent Health Check-ups: When was your last general physical exam or check-up with a doctor? (Approximate date or time frame.) Did it include blood work? If so, were any abnormalities noted (e.g., high cholesterol, high blood sugar)?</label>
+            <textarea id="recent-checkups" name="Recent Health Check-ups"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="injuries">• Injuries or Limitations: Do you have any injuries, physical disabilities, or pain issues that affect your daily life or ability to exercise? (For example: chronic back pain, knee injury, past surgeries, etc. – describe severity and any guidance from doctors.)</label>
+            <textarea id="injuries" name="Injuries or Limitations"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="sleep-disorders">• Sleep Disorders: Have you ever been diagnosed with a sleep-related condition (insomnia, sleep apnea, etc.) or suspect you might have one? If yes, please elaborate.</label>
+            <textarea id="sleep-disorders" name="Sleep Disorders"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="family-history">• Family History: Does your family have a history of any major health issues? (Examples: heart disease, stroke, diabetes, cancer, Alzheimer's, etc., in close relatives like parents or siblings.) List any that apply and the relative's relation to you.</label>
+            <textarea id="family-history" name="Family History"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="vaccinations">• Vaccinations: Are you up-to-date on common vaccinations (such as tetanus, flu shot annually, COVID-19, etc.)? List any adult vaccines you have not received or are unsure about.</label>
+            <textarea id="vaccinations" name="Vaccinations"></textarea>
+          </div>
+        </fieldset>
+        
+        <fieldset id="nutrition">
+          <legend><i class="fas fa-apple-alt"></i> Nutrition & Dietary Habits</legend>
+          <div class="form-group">
+            <label for="diet-description">• Diet Description: How would you describe your typical diet or way of eating in a few sentences? (For example: "I eat a standard American diet with some fast food," or "Mostly vegetarian with occasional fish," or "Home-cooked meals most days, love sweets," etc.)</label>
+            <textarea id="diet-description" name="Diet Description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="meal-pattern">• Meal Pattern: How many meals and snacks do you usually eat per day? Do you tend to skip any meals regularly (e.g., breakfast)?</label>
+            <textarea id="meal-pattern" name="Meal Pattern"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="fruits-vegetables">• Fruits and Vegetables: On average, how many servings of vegetables and fruits do you consume in a day? (One serving ~ 1 cup leafy greens, 1 medium fruit, etc.)</label>
+            <input type="number" id="fruits-vegetables" name="Fruits and Vegetables" min="0">
+          </div>
+          <div class="form-group">
+            <label for="protein-sources">• Protein Sources: What are your primary protein sources? (e.g., chicken, beef, fish, eggs, beans, tofu, dairy, etc.) And do you eat protein with most meals?</label>
+            <textarea id="protein-sources" name="Protein Sources"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="carbohydrates">• Carbohydrates and Grains: Do you typically choose whole grains (whole wheat bread, brown rice, etc.) or refined grains (white bread, white rice)? How frequently do you eat high-carb foods like bread, pasta, rice, potatoes in a day?</label>
+            <textarea id="carbohydrates" name="Carbohydrates and Grains"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="fats">• Fats: What kind of fats do you include in your diet? (e.g., butter, olive oil, vegetable oils, nuts, avocado, etc.)</label>
+            <textarea id="fats" name="Fats"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="processed-foods">• Processed Foods & Sugar: How often do you consume processed or convenience foods (frozen meals, chips, sweets)? Do you drink sugary beverages (soda, sweet tea, energy drinks)? If yes, how many per week?</label>
+            <textarea id="processed-foods" name="Processed Foods & Sugar"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="dining-out">• Dining Out: How often do you eat out at restaurants or get take-out in a typical week? (Include fast food and coffee shop drinks/pastries in this count.)</label>
+            <input type="number" id="dining-out" name="Dining Out" min="0">
+          </div>
+          <div class="form-group">
+            <label for="hydration">• Hydration: How much water do you drink daily, on average? (Specify in glasses or liters.) Do you frequently drink other beverages (coffee/tea, juice, soda), and roughly how much of each?</label>
+            <textarea id="hydration" name="Hydration"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="dietary-restrictions">• Dietary Restrictions: Do you have any specific dietary restrictions or styles you follow? (e.g., vegetarian, vegan, keto, low-carb, low-salt, religious dietary laws, food allergies like gluten-free or lactose-free, etc.) Please list and describe any that apply.</label>
+            <textarea id="dietary-restrictions" name="Dietary Restrictions"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="cooking-habits">• Cooking vs Processed: How often do you cook fresh meals at home versus eating pre-packaged or restaurant food? (e.g., "I cook from scratch most nights" or "I mostly microwave ready meals.")</label>
+            <textarea id="cooking-habits" name="Cooking vs Processed"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="cravings">• Cravings or Problem Foods: Do you have any strong food cravings or particular "problem" foods you tend to overeat? (For instance, late-night snacks, sweets, fried foods, etc.)</label>
+            <textarea id="cravings" name="Cravings or Problem Foods"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="diet-products">• Supplements/Diet Products: (If not already noted) Are you using any special diet products (like meal replacement shakes, weight loss pills, etc.) or following any specific diet program currently? If yes, please detail.</label>
+            <textarea id="diet-products" name="Supplements/Diet Products"></textarea>
+          </div>
+        </fieldset>
+        
+        <fieldset id="activity">
+          <legend><i class="fas fa-running"></i> Physical Activity & Exercise Habits</legend>
+          <div class="form-group">
+            <label for="activity-level">• Current Activity Level: How would you rate your overall activity level? (Sedentary – little to no exercise; Lightly active; Moderately active; Very active – intense exercise or physical job.)</label>
+            <select id="activity-level" name="Current Activity Level" required>
+              <option value="">Please select</option>
+              <option>Sedentary</option>
+              <option>Lightly active</option>
+              <option>Moderately active</option>
+              <option>Very active</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="exercise-frequency">• Exercise Frequency: How many days per week do you exercise intentionally (any planned workout or sport)? And for approximately how long each session?</label>
+            <textarea id="exercise-frequency" name="Exercise Frequency"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="exercise-types">• Exercise Types: What types of exercise or physical activities do you typically engage in? (e.g., walking, running, cycling, gym workouts, yoga, team sports, swimming, etc. List all that apply and frequency of each if possible.)</label>
+            <textarea id="exercise-types" name="Exercise Types"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="strength-training">• Strength Training: Do you do any strength or resistance training (using weights, resistance bands, or bodyweight exercises like push-ups/squats)? If yes, how often per week?</label>
+            <textarea id="strength-training" name="Strength Training"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="flexibility">• Flexibility/Mobility: Do you practice stretching, yoga, or other flexibility exercises regularly? If yes, how often and what type?</label>
+            <textarea id="flexibility" name="Flexibility/Mobility"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="daily-movement">• Daily Movement: Outside of structured exercise, how active is your typical day? (For example: mostly sitting at a desk, standing/walking a lot at work, doing physical labor, etc.) If you use a step counter, what's your average daily steps?</label>
+            <textarea id="daily-movement" name="Daily Movement"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="exercise-barriers">• Barriers to Exercise: If you are not exercising as much as you'd like, what are the main barriers? (e.g., lack of time, lack of energy or motivation, no access to facilities, physical pain/injury, not sure what to do, etc.)</label>
+            <textarea id="exercise-barriers" name="Barriers to Exercise"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="enjoyment">• Enjoyment: Are there physical activities you enjoy or have interest in starting? (This could be dancing, hiking, martial arts, etc. – knowing what you find fun can help tailor your plan.)</label>
+            <textarea id="enjoyment" name="Enjoyment"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="exercise-intensity">• Exercise Intensity: When you exercise, how hard do you typically push yourself? (Light – you can easily talk; Moderate – you're breathing faster but can speak; Vigorous – challenging to speak more than a few words; N/A if not exercising.)</label>
+            <select id="exercise-intensity" name="Exercise Intensity">
+              <option value="">Please select</option>
+              <option>Light</option>
+              <option>Moderate</option>
+              <option>Vigorous</option>
+              <option>N/A</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="past-exercise">• Past Exercise Habits: Have you ever followed a regular exercise routine in the past for a significant period? If so, what worked for you and why did it stop (if it did)?</label>
+            <textarea id="past-exercise" name="Past Exercise Habits"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="physical-limitations">• Physical Limitations: Do you have any injuries or conditions that limit certain types of exercise? (This may overlap with earlier questions – e.g., "bad knees make running hard," or "asthma limits intense cardio," etc.)</label>
+            <textarea id="physical-limitations" name="Physical Limitations"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="equipment-access">• Equipment/Access: What kind of access do you have for exercise? (Gym membership; Home equipment (treadmill, weights, etc.); Outdoor space like parks/trails; Community center or classes; Swimming pool; None of the above.)</label>
+            <textarea id="equipment-access" name="Equipment/Access"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="occupation-activity">• Occupation Activity: Does your job involve physical activity? (e.g., mostly sitting at a computer, standing all day, lifting heavy objects, etc.) And how many hours per day do you typically work?</label>
+            <textarea id="occupation-activity" name="Occupation Activity"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="commute">• Commute: How do you typically commute/travel daily (car, public transit, walking, biking) and how long does it take? (This can affect time and opportunity for activity.)</label>
+            <textarea id="commute" name="Commute"></textarea>
+          </div>
+        </fieldset>
+        
+        <fieldset id="sleep">
+          <legend><i class="fas fa-bed"></i> Sleep Habits</legend>
+          <div class="form-group">
+            <label for="sleep-duration">• Sleep Duration: On average, how many hours of sleep do you get per night? (Weekdays vs weekends if different.)</label>
+            <input type="number" id="sleep-duration" name="Sleep Duration" step="0.1">
+          </div>
+          <div class="form-group">
+            <label for="sleep-quality">• Sleep Quality: How would you rate the quality of your sleep? (Great – wake up feeling rested; Fair – somewhat rested; Poor – often feel tired on waking or wake up frequently.)</label>
+            <select id="sleep-quality" name="Sleep Quality">
+              <option value="">Please select</option>
+              <option>Great</option>
+              <option>Fair</option>
+              <option>Poor</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="sleep-schedule">• Sleep Schedule: What is your usual bedtime and wake-up time? Is your sleep/wake schedule regular or does it vary widely day to day?</label>
+            <textarea id="sleep-schedule" name="Sleep Schedule"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="sleep-difficulties">• Difficulty Sleeping: Do you have any difficulties with sleep? (Trouble falling asleep; Waking up frequently at night; Waking up too early; Nightmares; None of the above.) Please elaborate on any checked.</label>
+            <textarea id="sleep-difficulties" name="Difficulty Sleeping"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="sleep-environment">• Sleep Environment: Do you use anything to help you sleep? (Examples: sleep medication, melatonin or herbal supplements, white noise machine, earplugs, etc.) Also, is your bedroom generally dark and quiet?</label>
+            <textarea id="sleep-environment" name="Sleep Environment"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="screen-time">• Screen Time: Do you use electronic devices (phone, computer, TV) close to bedtime? If yes, how soon before bed do you typically stop using them?</label>
+            <textarea id="screen-time" name="Screen Time at Bedtime"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="caffeine-sleep">• Caffeine & Sleep: How many caffeinated beverages (coffee, tea, cola, energy drinks) do you typically consume per day, and when is your last intake relative to bedtime?</label>
+            <textarea id="caffeine-sleep" name="Caffeine & Sleep"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="napping">• Napping: Do you take naps during the day? If so, how often and how long?</label>
+            <textarea id="napping" name="Napping"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="shift-work">• Shift Work/Irregular Hours: Do you do shift work or have an irregular schedule (including travel across time zones) that impacts your sleep patterns? If yes, please describe.</label>
+            <textarea id="shift-work" name="Shift Work/Irregular Hours"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="sleep-satisfaction">• Sleep Satisfaction: Do you usually wake up feeling refreshed? If not, how often do you feel fatigue or low energy during the day (rarely, some days, most days, every day)?</label>
+            <select id="sleep-satisfaction" name="Sleep Satisfaction">
+              <option value="">Please select</option>
+              <option>Rarely</option>
+              <option>Some days</option>
+              <option>Most days</option>
+              <option>Every day</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="sleep-aids">• Sleep Aids or Practices: Do you have any bedtime routines or practices to help you wind down? (e.g., reading, meditation, warm shower, etc.) Please describe any.</label>
+            <textarea id="sleep-aids" name="Sleep Aids or Practices"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="sleep-goals">• Sleep Goals: Do you feel you need more or better sleep? If so, how many hours would you consider ideal and what do you think is interfering with that currently?</label>
+            <textarea id="sleep-goals" name="Sleep Goals"></textarea>
+          </div>
+        </fieldset>
+        
+        <fieldset id="mental">
+          <legend><i class="fas fa-brain"></i> Stress & Mental Well-Being</legend>
+          <div class="form-group">
+            <label for="stress-level">• Stress Level: How would you rate your typical stress level on a scale of 1-10 (10 being extremely stressed)?</label>
+            <input type="number" id="stress-level" name="Stress Level" min="1" max="10">
+          </div>
+          <div class="form-group">
+            <label for="stressors">• Main Stressors: What are the primary sources of stress in your life currently? (Examples: work/school, financial concerns, family or relationships, health issues, world events, etc.)</label>
+            <textarea id="stressors" name="Main Stressors"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="stress-symptoms">• Stress Symptoms: How does stress typically manifest for you? (e.g., trouble sleeping, irritability, anxiety, frequent headaches or muscle tension, emotional eating, difficulty concentrating, etc.)</label>
+            <textarea id="stress-symptoms" name="Stress Symptoms"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="coping-mechanisms">• Coping Mechanisms: How do you usually cope with or manage stress? (Examples: exercise, talking to friends/family, meditation or prayer, hobbies, listening to music, eating/drinking, smoking, or do you feel you don't cope well and just endure it?)</label>
+            <textarea id="coping-mechanisms" name="Coping Mechanisms"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="relaxation-practices">• Relaxation Practices: Do you engage in relaxation or mental health practices regularly? (Meditation, deep breathing exercises, yoga, journaling, therapy or counseling, religious/spiritual practices, other – please list.) How often?</label>
+            <textarea id="relaxation-practices" name="Relaxation Practices"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="mood">• Mood: How would you describe your overall mood and mental state lately? (Examples: "Generally positive," "Up and down, sometimes anxious," "Often feeling down or depressed," etc.)</label>
+            <textarea id="mood" name="Mood"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="mental-health">• Mental Health History: Have you ever been diagnosed with or treated for any mental health conditions such as depression, anxiety, PTSD, etc.? Or do you suspect you might have one currently? (If yes and you're comfortable, briefly describe and note if you are currently in treatment or taking medication for it.)</label>
+            <textarea id="mental-health" name="Mental Health History"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="life-satisfaction">• Life Satisfaction: On a scale of 1-10, how satisfied are you with your life in general right now? And are there specific areas you wish were different (career, relationships, personal growth, etc.)?</label>
+            <textarea id="life-satisfaction" name="Life Satisfaction"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="support-system">• Support System: Do you have people you can confide in or turn to for emotional support when stressed or upset? (Yes/No, and who?)</label>
+            <textarea id="support-system" name="Support System"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="work-life-balance">• Work-Life Balance: Do you feel you have a healthy balance between work (or school) and personal life? If not, what are the main issues (e.g., working too many hours, bringing work stress home, etc.)?</label>
+            <textarea id="work-life-balance" name="Work-Life Balance"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="hobbies">• Enjoyment & Hobbies: What activities or hobbies bring you joy or help you relax? How often do you engage in these? (If you don't have much time for hobbies, mention any you would enjoy if time permitted.)</label>
+            <textarea id="hobbies" name="Enjoyment & Hobbies"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="stress-management">• Stress Management Goal: Are you interested in learning or practicing new stress management techniques (like mindfulness, therapy, etc.) or do you have any in mind you'd like to try?</label>
+            <textarea id="stress-management" name="Stress Management Goal"></textarea>
+          </div>
+        </fieldset>
+        
+        <fieldset id="lifestyle">
+          <legend><i class="fas fa-wine-bottle"></i> Lifestyle Habits (Smoking, Alcohol, Substance Use)</legend>
+          <div class="form-group">
+            <label for="smoking">• Smoking/Tobacco: Do you smoke cigarettes or use other tobacco products (including e-cigarettes/vaping, cigars, chewing tobacco)? If yes, how much or how often? If you quit, how long ago and how many years did you smoke?</label>
+            <textarea id="smoking" name="Smoking/Tobacco"></textarea>
+          </div>
+          <div class="form-group">
+            <label>• Alcohol: Do you drink alcohol?</label>
+            <div class="radio-options">
+              <label class="radio-label">
+                <input type="radio" name="alcoholConsumption" value="none" checked> I don't drink alcohol
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="alcoholConsumption" value="some"> I drink alcohol
+              </label>
+            </div>
+            <textarea id="alcohol" name="Alcohol" style="display: none;"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="recreational-drugs">• Recreational Drugs: Do you use any recreational drugs or substances (e.g., marijuana, cocaine, etc.)? If yes, what substance and how frequently? (This is confidential and only to tailor advice appropriately.)</label>
+            <textarea id="recreational-drugs" name="Recreational Drugs"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="caffeine">• Caffeine: How many caffeinated beverages do you have per day? (Include coffee, tea, cola, energy drinks – e.g., "2 cups of coffee and 1 soda") Do you feel you are sensitive to caffeine (e.g., get jittery or insomnia from it)?</label>
+            <textarea id="caffeine" name="Caffeine"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="other-substances">• Other Substances: Do you use any other substances or supplements for performance or body composition (like steroids, weight-loss drugs, etc.)? Please list if any.</label>
+            <textarea id="other-substances" name="Other Substances"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="screen-time-daily">• Screen Time: Approximately how many hours per day do you spend in front of a screen (computer, phone, TV) for work and leisure? And do you feel this impacts your health (e.g., sleep, posture, stress)?</label>
+            <textarea id="screen-time-daily" name="Screen Time (Daily)"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="sun-exposure">• Sun Exposure: How often are you exposed to sunlight/natural light? (e.g., "I'm outdoors briefly most days," or "rarely see the sun on workdays," etc.) Do you regularly use sunscreen when outdoors?</label>
+            <textarea id="sun-exposure" name="Sun Exposure"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="occupational-hazards">• Occupational Hazards: Are you exposed to any health hazards in your environment (at work or home)? (Examples: loud noise, air pollution, chemicals, secondhand smoke, extreme stress environment, etc.) If yes, describe.</label>
+            <textarea id="occupational-hazards" name="Occupational Hazards"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="safety-habits">• Safety Habits: Do you consistently practice safety measures like wearing seatbelts, helmets (when biking), and safe driving (no texting etc.)? (This affects overall injury risk profile.)</label>
+            <textarea id="safety-habits" name="Safety Habits"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="substance-goals">• Substance Goals: Are you trying to quit or reduce any substance (smoking, alcohol, etc.)? If yes, what support or methods are you using or interested in using?</label>
+            <textarea id="substance-goals" name="Substance Goals"></textarea>
+          </div>
+        </fieldset>
+        
+        <fieldset id="social">
+          <legend><i class="fas fa-users"></i> Social & Environmental Factors</legend>
+          <div class="form-group">
+            <label for="living-situation">• Living Situation: Who do you live with (alone, with family, roommates, etc.)? And do you have any dependents you care for (children, elderly family)?</label>
+            <textarea id="living-situation" name="Living Situation"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="social-support">• Social Support: Do you feel you have a strong social support network? (Yes/No) How often do you communicate or spend time with close friends or family (outside of those you live with)?</label>
+            <textarea id="social-support" name="Social Support"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="social-activities">• Social Activities: How often do you participate in social or community activities? (Examples: going out with friends, group sports, clubs, religious gatherings, volunteering, community events, etc.)</label>
+            <textarea id="social-activities" name="Social Activities"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="community-sense">• Community Sense: Do you feel a sense of belonging to any community or group? If yes, what is the community (could be cultural, religious, hobby-related, online forum, etc.)? If no, do you wish to build more community connections?</label>
+            <textarea id="community-sense" name="Community Sense"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="relationship-status">• Relationship Status: (Optional) Are you in a significant relationship (spouse/partner)? If yes, is this relationship a source of support for you? If not in a relationship, skip or note if seeking one (as it can affect social wellness).</label>
+            <textarea id="relationship-status" name="Relationship Status"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="work-environment">• Work Environment: How would you describe the social aspect of your workplace or school? (e.g., supportive colleagues, isolated, high-pressure, team-oriented, etc.) Does your work/school have any wellness programs or support you can utilize?</label>
+            <textarea id="work-environment" name="Work Environment (Social)"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="cultural-factors">• Cultural Factors: Are there any cultural or religious practices that are important in your life and might influence your health habits? (For example, fasting during Ramadan, vegetarian for religious reasons, family eating patterns, communal living, etc.) Please describe so your plan can respect these practices.</label>
+            <textarea id="cultural-factors" name="Cultural Factors"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="stressful-relationships">• Stressful Relationships: Are there any significant conflicts or stressful relationships in your life currently (personal or work)? You don't need to detail it, but yes/no and general impact (e.g., "yes, ongoing family conflict causing stress").</label>
+            <textarea id="stressful-relationships" name="Stressful Relationships"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="community-resources">• Community Resources: Do you have access to community resources like parks, gyms, farmer's markets, healthcare facilities in your area? Are there any limitations (financial or geographic) that make it hard for you to utilize such resources?</label>
+            <textarea id="community-resources" name="Community Resources"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="environmental-comfort">• Environmental Comfort: Do you feel safe and comfortable in your home and neighborhood? (e.g., safe to walk outside, low crime, stable housing, etc.) If there are environmental stressors (noise, crowding, etc.), please note them.</label>
+            <textarea id="environmental-comfort" name="Environmental Comfort"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="pets">• Pets: Do you have pets? (Pets can affect activity levels, stress, companionship, allergies, etc.) If yes, list them and any impact (like walking a dog = exercise).</label>
+            <textarea id="pets" name="Pets"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="travel">• Travel: Do you travel frequently? (Frequent travel can disrupt routines; note if travel is for work or pleasure and how often, plus time zones if applicable.)</label>
+            <textarea id="travel" name="Travel"></textarea>
+          </div>
+        </fieldset>
+        
+        <fieldset id="goals">
+          <legend><i class="fas fa-bullseye"></i> Goals & Personal Priorities</legend>
+          <div class="form-group">
+            <label for="health-goals">• Primary Health Goals: What are your top health and wellness goals or areas of improvement? (Please list in order of importance to you. E.g., lose weight, build muscle, increase energy, improve mood, reduce stress, sleep better, manage a specific health condition, etc.)</label>
+            <textarea id="health-goals" name="Primary Health Goals"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="motivation">• Motivation: Why are these goals important to you? (For instance: "I want to have more energy to play with my kids," or "reduce health risks because my parent had heart disease," or "feel more confident in my body," etc.)</label>
+            <textarea id="motivation" name="Motivation"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="past-attempts">• Past Attempts: Have you tried to address these goals in the past? If yes, what strategies did you use and what were the results or obstacles? (e.g., "Tried dieting (keto) last year, lost some weight but regained," or "Joined a gym but stopped going after 2 months," or "Took meditation classes which helped but I quit due to time.")</label>
+            <textarea id="past-attempts" name="Past Attempts"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="learning-style">• Learning Style: How do you prefer to receive guidance or learn new health habits? (Examples: detailed scientific explanation, simple do's and don'ts, visual aids like charts, step-by-step instructions, accountability from a coach or group, etc.)</label>
+            <textarea id="learning-style" name="Learning Style"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="confidence">• Confidence: On a scale of 1-10, how confident are you that you can make changes to improve your health at this time? And why do you feel that way?</label>
+            <textarea id="confidence" name="Confidence"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="support-needs">• Support Needs: What kind of support or resources do you think would help you the most in achieving your health goals? (Examples: a structured plan to follow, regular check-ins or accountability, support group or buddy, more knowledge/education on certain topics, stress/time management techniques, etc.)</label>
+            <textarea id="support-needs" name="Support Needs"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="interests">• Interests: Are there any specific wellness topics or approaches you are particularly interested in exploring? (Such as intermittent fasting, herbal medicine, high-intensity training, mindfulness meditation, etc.)</label>
+            <textarea id="interests" name="Interests"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="fears">• Fears/Concerns: Do you have any worries or concerns about making health changes? (For example: fear of failure, concern about time commitment, worry about injury, dietary change being too hard, etc.)</label>
+            <textarea id="fears" name="Fears/Concerns"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="ideal-outcome">• Ideal Outcome: Imagine yourself a year from now in your ideal state of health. Briefly describe what that looks like or how you feel. (For example: "I am 20 lbs lighter, full of energy, sleeping 8 hours, and feel calm and happy most days.")</label>
+            <textarea id="ideal-outcome" name="Ideal Outcome"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="commitment">• Commitment: On a scale of 1-10, how committed are you to investing time and effort into improving your health right now? (1 = not at all, 10 = completely committed). Explain any life circumstances that might affect this.</label>
+            <textarea id="commitment" name="Commitment"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="additional-goals">• Additional Goals: Besides health (nutrition, fitness, etc.), do you have any other personal development or life balance goals? (For example, "spend more time with family," "advance in career without burning out," etc.)</label>
+            <textarea id="additional-goals" name="Additional Goals"></textarea>
+          </div>
+        </fieldset>
+        
+        <fieldset id="additional">
+          <legend><i class="fas fa-clipboard-list"></i> Additional Information</legend>
+          <div class="form-group">
+            <label for="other-concerns">• Other Concerns: Is there any other health or wellness concern not covered by the questions above that you'd like to mention? (e.g., "I get frequent colds," "I have trouble with meal prepping due to my schedule," etc.)</label>
+            <textarea id="other-concerns" name="Other Concerns"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="resource-access">• Resource Access: Are there any resources you do not have or find hard to access which might affect your wellness plan? (Consider: affordable healthy food, safe place to exercise, time due to caregiving or work, etc.)</label>
+            <textarea id="resource-access" name="Resource Access"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="cultural-preferences">• Cultural/Personal Preferences: Do you have any cultural, religious, or personal preferences that you want to be honored in your wellness plan? (e.g., "I prefer Ayurvedic approaches," or "My culture uses certain herbs and spices," etc.)</label>
+            <textarea id="cultural-preferences" name="Cultural/Personal Preferences"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="feedback-style">• Feedback Style: Do you prefer a gentle approach or a more "tough love" approach in your wellness guidance?</label>
+            <textarea id="feedback-style" name="Feedback Style"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="anything-else">• Anything Else: Finally, is there anything else about you or your lifestyle that you think is important for us to know to create the best possible personalized report for you?</label>
+            <textarea id="anything-else" name="Anything Else"></textarea>
+          </div>
+        </fieldset>
+        
+        <div class="section-navigation">
+          <button type="button" id="prevSection" class="btn btn-secondary" disabled>Previous Section</button>
+          <button type="button" id="saveProgress" class="btn btn-secondary">Save Progress</button>
+          <button type="button" id="nextSection" class="btn btn-primary">Next Section</button>
         </div>
-      </fieldset>
+        
+        <div class="form-group" style="margin-top: 2rem;">
+          <button type="submit" class="btn btn-success" style="width: 100%;">Submit Questionnaire</button>
+        </div>
+      </form>
+      
+      <div id="report"></div>
+    </div>
+  </div>
 
-      <fieldset id="social">
-        <legend><i class="fas fa-users"></i> Social & Environmental Factors</legend>
-
-        <div class="form-group">
-          <label for="living-situation">• Living Situation: Who do you live with (alone, with family, roommates, etc.)? And do
+  <script>
+    // Landing page and questionnaire navigation
+    function startQuestionnaire() {
+      document.getElementById('landingPage').style.display = 'none';
+      document.getElementById('questionnairePage').style.display = 'block';
+      window.scrollTo(0, 0);
+    }
+    
+    function goHome() {
+      document.getElementById('questionnairePage').style.display = 'none';
+      document.getElementById('landingPage').style.display = 'block';
+      window.scrollTo(0, 0);
+    }
+    
+    // Questionnaire functionality (unchanged from original)
+    document.addEventListener('DOMContentLoaded', function() {
+      // Form fieldsets and navigation
+      const fieldsets = document.querySelectorAll('fieldset');
+      const steps = document.querySelectorAll('.step');
+      const progressBar = document.getElementById('questionnaireProgress');
+      const prevButton = document.getElementById('prevSection');
+      const nextButton = document.getElementById('nextSection');
+      const saveButton = document.getElementById('saveProgress');
+      const form = document.getElementById('questionnaireForm');
+      
+      let currentSection = 0;
+      const totalSections = fieldsets.length;
+      
+      // Initialize form
+      showSection(0);
+      loadProgress();
+      
+      // Show specific section
+      function showSection(index) {
+        // Hide all fieldsets
+        fieldsets.forEach(fieldset => {
+          fieldset.classList.remove('active');
+        });
+        
+        // Show current fieldset
+        fieldsets[index].classList.add('active');
+        
+        // Update progress steps
+        steps.forEach((step, i) => {
+          if (i < index) {
+            step.classList.add('completed');
+            step.classList.remove('active');
+          } else if (i === index) {
+            step.classList.add('active');
+            step.classList.remove('completed');
+          } else {
+            step.classList.remove('active', 'completed');
+          }
+        });
+        
+        // Update progress bar
+        const progressPercent = ((index + 1) / totalSections) * 100;
+        progressBar.style.width = `${progressPercent}%`;
+        
+        // Update navigation buttons
+        prevButton.disabled = index === 0;
+        
+        // Change next button text on last section
+        if (index === totalSections - 1) {
+          nextButton.textContent = 'Review';
+        } else {
+          nextButton.textContent = 'Next Section';
+        }
+        
+        // Scroll to top of form
+        window.scrollTo(0, 0);
+      }
+      
+      // Next section button
+      nextButton.addEventListener('click', function() {
+        if (currentSection < totalSections - 1) {
+          currentSection++;
+          showSection(currentSection);
+        } else {
+          // On last section, validate and show summary
+          if (validateForm()) {
+            showSummary();
+          }
+        }
+      });
+      
+      // Previous section button
+      prevButton.addEventListener('click', function() {
+        if (currentSection > 0) {
+          currentSection--;
+          showSection(currentSection);
+        }
+      });
+      
+      // Step navigation
+      steps.forEach((step, index) => {
+        step.addEventListener('click', function() {
+          currentSection = index;
+          showSection(currentSection);
+        });
+      });
+      
+      // Save progress
+      saveButton.addEventListener('click', saveProgress);
+      
+      // Conditional logic for menstrual status
+      const biologicalSex = document.getElementById('biological-sex');
+      const menstrualGroup = document.getElementById('menstrual-group');
+      
+      function toggleMenstrualQuestion() {
+        if (biologicalSex.value === 'Male') {
+          menstrualGroup.style.display = 'none';
+        } else {
+          menstrualGroup.style.display = 'block';
+        }
+      }
+      
+      biologicalSex.addEventListener('change', toggleMenstrualQuestion);
+      toggleMenstrualQuestion();
+      
+      // Handle alcohol consumption
+      const alcoholRadios = document.querySelectorAll('input[name="alcoholConsumption"]');
+      const alcoholField = document.getElementById('alcohol');
+      
+      function toggleAlcoholDetails() {
+        const selectedValue = document.querySelector('input[name="alcoholConsumption"]:checked').value;
+        if (selectedValue === 'none') {
+          alcoholField.style.display = 'none';
+        } else {
+          alcoholField.style.display = 'block';
+        }
+      }
+      
+      alcoholRadios.forEach(radio => {
+        radio.addEventListener('change', toggleAlcoholDetails);
+      });
+      
+      // Form validation
+      function validateForm() {
+        let isValid = true;
+        const requiredFields = document.querySelectorAll('[required]');
+        
+        requiredFields.forEach(field => {
+          if (!field.value.trim()) {
+            isValid = false;
+            field.classList.add('error');
+            
+            // Add error message if it doesn't exist
+            let errorMsg = field.parentNode.querySelector('.error-message');
+            if (!errorMsg) {
+              errorMsg = document.createElement('div');
+              errorMsg.className = 'error-message';
+              errorMsg.textContent = 'This field is required';
+              field.parentNode.appendChild(errorMsg);
+            }
+          } else {
+            field.classList.remove('error');
+            const errorMsg = field.parentNode.querySelector('.error-message');
+            if (errorMsg) {
+              errorMsg.remove();
+            }
+          }
+        });
+        
+        return isValid;
+      }
+      
+      // Save progress function
+      function saveProgress() {
+        const formData = new FormData(form);
+        const data = {};
+        
+        for (let [key, value] of formData.entries()) {
+          data[key] = value;
+        }
+        
+        // Save current section
+        data.currentSection = currentSection;
+        
+        localStorage.setItem('healthQuestionnaireProgress', JSON.stringify(data));
+        
+        // Show confirmation
+        showNotification('Your progress has been saved!');
+      }
+      
+      // Load progress function
+      function loadProgress() {
+        const savedData = localStorage.getItem('healthQuestionnaireProgress');
+        if (savedData) {
+          const data = JSON.parse(savedData);
+          
+          // Populate form fields
+          for (let key in data) {
+            if (key !== 'currentSection') {
+              const field = document.querySelector(`[name="${key}"]`);
+              if (field) {
+                field.value = data[key];
+              }
+            }
+          }
+          
+          // Set current section
+          if (data.currentSection !== undefined) {
+            currentSection = parseInt(data.currentSection);
+            showSection(currentSection);
+          }
+          
+          // Trigger conditional logic
+          toggleMenstrualQuestion();
+          toggleAlcoholDetails();
+          
+          // Show confirmation
+          showNotification('Your previous progress has been restored.');
+        }
+      }
+      
+      // Show notification
+      function showNotification(message) {
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.textContent = message;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+          notification.remove();
+        }, 3000);
+      }
+      
+      // Show summary before submitting
+      function showSummary() {
+        // This would show a summary of all answers before final submission
+        // For now, we'll just submit the form
+        form.dispatchEvent(new Event('submit'));
+      }
+      
+      // Form submission
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (validateForm()) {
+          // Process form data
+          const formData = new FormData(this);
+          const data = {};
+          
+          for (let [key, value] of formData.entries()) {
+            data[key] = value;
+          }
+          
+          // Show success message
+          const reportDiv = document.getElementById('report');
+          reportDiv.innerHTML = `
+            <div class="success-message">
+              <h3>Thank You!</h3>
+              <p>Your health questionnaire has been submitted successfully. We will review your responses and prepare your personalized health report.</p>
+            </div>
+          `;
+          reportDiv.style.display = 'block';
+          
+          // Clear saved progress
+          localStorage.removeItem('healthQuestionnaireProgress');
+          
+          // Scroll to report
+          reportDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
