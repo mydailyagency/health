@@ -422,6 +422,32 @@
       color: #e9ecef;
     }
     
+    /* Journey Section - New Section */
+    .journey {
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+    
+    .journey-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .journey h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 2rem;
+    }
+    
+    .journey p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+    }
+    
     /* Questionnaire Styles (unchanged from original) */
     .container {
       max-width: 800px;
@@ -813,7 +839,6 @@
         </a>
       </div>
     </nav>
-
     <!-- Hero Section -->
     <section class="hero">
       <div class="hero-content">
@@ -824,7 +849,6 @@
         </button>
       </div>
     </section>
-
     <!-- Benefits Section -->
     <section class="benefits">
       <div class="benefits-container">
@@ -842,13 +866,12 @@
           </div>
           <div class="benefit-card">
             <i class="fas fa-shield-alt"></i>
-            <h3>Secure & Confidential</h3>
-            <p>Your health information is protected with the highest standards of privacy and security.</p>
+            <h3>Secure & Anonymous</h3>
+            <p>Your health information is completely anonymous. We collect no names or birthdays, ensuring your privacy and peace of mind.</p>
           </div>
         </div>
       </div>
     </section>
-
     <!-- Trust Section -->
     <section class="trust">
       <div class="trust-container">
@@ -872,7 +895,6 @@
         </div>
       </div>
     </section>
-
     <!-- Features Section -->
     <section class="features">
       <div class="features-container">
@@ -901,7 +923,6 @@
         </div>
       </div>
     </section>
-
     <!-- Testimonials Section -->
     <section class="testimonials">
       <div class="testimonials-container">
@@ -940,7 +961,6 @@
         </div>
       </div>
     </section>
-
     <!-- Trust Indicators Section -->
     <section class="trust-indicators">
       <div class="trust-indicators-container">
@@ -959,17 +979,23 @@
           <div class="indicator-item">
             <i class="fas fa-award"></i>
             <h3>Expert</h3>
-            <p>Designed by Health Professionals</p>
+            <p>Designed by Health Professionals who continuously improve the assessment based on the latest data and technological advancements</p>
           </div>
           <div class="indicator-item">
             <i class="fas fa-lock"></i>
             <h3>100%</h3>
-            <p>Secure & Confidential</p>
+            <p>Secure & Anonymous - No patient identifiers are ever collected</p>
           </div>
         </div>
       </div>
     </section>
-
+    <!-- Journey Section -->
+    <section class="journey">
+      <div class="journey-container">
+        <h2 class="display-font">Your Health Journey</h2>
+        <p>Remember, this is not a quick fix or a temporary solution. This is a health and wellness journey designed to change your lifestyle and improve your quality of life for the long term. True transformation requires hard work, dedication, and motivation. There will be challenges along the way, but anything is possible when you reclaim your agency and take charge of your health. Each small step you take builds momentum toward a healthier, more vibrant you. This journey is about progress, not perfection, and every positive choice you make brings you closer to your wellness goals.</p>
+      </div>
+    </section>
     <!-- Disclaimer Section -->
     <section class="disclaimer">
       <div class="disclaimer-container">
@@ -986,7 +1012,6 @@
         <p style="margin-top: 1rem;"><em>By proceeding with this assessment, you acknowledge that you have read, understood, and agree to this disclaimer.</em></p>
       </div>
     </section>
-
     <!-- Final CTA -->
     <section class="final-cta">
       <h2 class="display-font">Ready to Reclaim Your Health Agency?</h2>
@@ -996,13 +1021,11 @@
       </button>
     </section>
   </div>
-
   <!-- Questionnaire Page -->
   <div class="questionnaire-page" id="questionnairePage">
     <a href="#" class="back-home" onclick="goHome()">
       <i class="fas fa-arrow-left"></i> Back to Home
     </a>
-
     <div class="container">
       <h1>Health Questionnaire</h1>
       
@@ -1553,7 +1576,6 @@
       <div id="report"></div>
     </div>
   </div>
-
   <script>
     // Landing page and questionnaire navigation
     function startQuestionnaire() {
